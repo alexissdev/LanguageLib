@@ -8,6 +8,9 @@ I would like to emphasize that this library depends on a class that extends "Yam
 
 class: https://pastebin.com/aQptr4DJ
 
+# Important
+to be able to use this library you will have to count the project and install it on your pc with 'mvn install'
+
 ```java
     public class Main extends JavaPlugin {
 
