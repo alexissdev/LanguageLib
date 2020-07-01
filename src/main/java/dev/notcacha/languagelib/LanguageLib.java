@@ -8,12 +8,15 @@ import java.util.Map;
 
 public class LanguageLib {
 
+    private final YamlConfiguration defaultFile;
     private final Map<String, YamlConfiguration> files;
     @NotNull
     private final TranslateManager translateManager;
 
-    public LanguageLib() {
+    public LanguageLib(@NotNull String defaultLanguage, @NotNull YamlConfiguration defaultFile) {
         this.files = new HashMap<>();
+        this.defaultFile = defaultFile;
+        this.files.put(defaultLanguage, defaultFile);
         this.translateManager = new TranslateManagerImplementation(this);
     }
 
@@ -27,5 +30,9 @@ public class LanguageLib {
 
     public @NotNull TranslateManager getTranslateManager() {
         return translateManager;
+    }
+
+    public YamlConfiguration getDefaultFile() {
+        return defaultFile;
     }
 }

@@ -11,16 +11,18 @@ class: https://pastebin.com/aQptr4DJ
 ```java
     public class Main extends JavaPlugin {
 
-        private Configuration config;
+        private Configuration en_language;
+        private Configuration es_language;
         private LanguageLib languageLib;
         
         @Override
         public void onEnable() {
-            this.config = new Configuration(this, "config.yml");
-            languageLib = new LanguageLib();
+            this.en_language = new Configuration(this, "en_language.yml");
+            this.es_language = new Configuration(this, "es_language.yml");
+            languageLib = new LanguageLib("EN", en_language);
             languageLib.getTranslateManager().addFile("ES", config);
             getTranslateManager().getTranslate().ifPresent(message -> {
-                getLogger().info(message.getMessage("messages.test", "es"));
+                getLogger().info(message.getMessage("messages.test", "es").setVariable("%test%", "testing set variable"));
             });
         }       
     }   

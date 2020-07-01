@@ -5,7 +5,10 @@ import org.jetbrains.annotations.NotNull;
 public interface TranslateMessage {
 
     @NotNull
-    String getMessage(@NotNull String path, @NotNull String language);
+    String getPath();
+
+    @NotNull
+    String getMessage(@NotNull String language);
 
     @NotNull
     TranslateMessage setVariable(@NotNull String key, @NotNull String value);

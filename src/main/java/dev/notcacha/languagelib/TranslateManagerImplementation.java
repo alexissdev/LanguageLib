@@ -17,8 +17,8 @@ public class TranslateManagerImplementation implements TranslateManager {
     }
 
     @Override
-    public Optional<TranslateMessage> getTranslate() {
-        return Optional.of(new LanguageTranslateMessage(languageLib));
+    public Optional<TranslateMessage> getTranslate(@NotNull String path) {
+        return Optional.ofNullable(languageLib.getDefaultFile().getString(path,null)).map(string -> new LanguageTranslateMessage(path,languageLib));
     }
 
     @Override

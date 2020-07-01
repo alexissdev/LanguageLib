@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface TranslateManager {
 
-    Optional<TranslateMessage> getTranslate();
+    Optional<TranslateMessage> getTranslate(@NotNull String path);
 
     boolean containsFile(@NotNull String language);
 
