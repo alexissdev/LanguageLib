@@ -19,8 +19,13 @@ class: https://pastebin.com/aQptr4DJ
         public void onEnable() {
             this.en_language = new Configuration(this, "en_language.yml");
             this.es_language = new Configuration(this, "es_language.yml");
+            /* *
+            * The "LanguageLab" parameters is the default language
+            * The first parameter is the name of the language
+            * The second parameter is the class that extends "Yaml Configuration"
+            */
             languageLib = new LanguageLib("EN", en_language);
-            languageLib.getTranslateManager().addFile("ES", config);
+            languageLib.getTranslateManager().addFile("ES", es_language);
             getTranslateManager().getTranslate().ifPresent(message -> {
                 getLogger().info(message.getMessage("messages.test", "es").setVariable("%test%", "testing set variable"));
             });
