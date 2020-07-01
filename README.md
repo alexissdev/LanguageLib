@@ -26,8 +26,8 @@ class: https://pastebin.com/aQptr4DJ
             */
             languageLib = new LanguageLib("EN", en_language);
             languageLib.getTranslateManager().addFile("ES", es_language);
-            getTranslateManager().getTranslate().ifPresent(message -> {
-                getLogger().info(message.getMessage("messages.test", "es").setVariable("%test%", "testing set variable"));
+            languageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
+                getLogger().info(setVariable("%test%", "testing set variable").getMessage("EN"));
             });
         }       
     }   

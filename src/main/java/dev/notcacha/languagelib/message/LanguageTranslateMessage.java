@@ -32,7 +32,7 @@ public class LanguageTranslateMessage implements TranslateMessage {
         } else {
             messageTranslate = this.languageLib.getDefaultFile().getString(getPath());
         }
-        for (String key : variables.values()) {
+        for (String key : variables.keySet()) {
             String value = variables.get(key);
             messageTranslate = messageTranslate.replace(key, value);
         }
