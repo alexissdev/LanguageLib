@@ -41,7 +41,7 @@ public class LanguageTranslateMessage implements TranslateMessage {
 
     @Override
     public @NotNull TranslateMessage setVariable(@NotNull String key, @NotNull String value) {
-        variables.put(key, value);
+        this.variables.put(key, value);
         return this;
     }
 }
