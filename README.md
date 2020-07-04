@@ -1,6 +1,6 @@
 # LanguageLib
 
-LanguageLab is a simple language system library, what is sought is to facilitate the use of multi-languages ​​in the plugins of the programmer who wants to use this library.
+LanguageLib is a simple language system library, what is sought is to facilitate the use of multi-languages ​​in the plugins of the programmer who wants to use this library.
 
 # Important
 to be able to use this library you will have to count the project and install it on your pc with 'mvn install'
@@ -50,7 +50,7 @@ https://pastebin.com/U2qsLNQv
             this.en_language = new Configuration(this, "en_language.yml");
             this.es_language = new Configuration(this, "es_language.yml");
             /* *
-            * The "LanguageLab" parameters is the default language
+            * The "LanguageLib" parameters is the default language
             * The first parameter is the name of the language
             * The second parameter is the class that extends "Yaml Configuration"
             */
@@ -75,7 +75,7 @@ https://pastebin.com/U2qsLNQv
         public void onEnable() {
             registerFiles();
             /* *
-            * The "LanguageLab" parameters is the default language
+            * The "LanguageLib" parameters is the default language
             * The first parameter is the name of the language
             * The second parameter has to be a class "Configuration" of BungeeCord
             */
