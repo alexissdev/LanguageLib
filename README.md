@@ -12,14 +12,14 @@ to be able to use this library you will have to count the project and install it
     <dependency>
        <groupId>dev.notcacha</groupId>
        <artifactId>LanguageLib-Bukkit</artifactId>
-       <version>1.0-SNAPSHOT</version>
+       <version>1.1-SNAPSHOT</version>
     </dependency>
 
     /* BungeeCord */
     <dependency>
        <groupId>dev.notcacha</groupId>
        <artifactId>LanguageLib-Bungee</artifactId>
-       <version>1.0-SNAPSHOT</version>
+       <version>1.1-SNAPSHOT</version>
     </dependency>
 ```
 
