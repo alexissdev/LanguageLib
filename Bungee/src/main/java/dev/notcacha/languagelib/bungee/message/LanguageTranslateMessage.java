@@ -1,6 +1,7 @@
-package dev.notcacha.languagelib.message;
+package dev.notcacha.languagelib.bungee.message;
 
-import dev.notcacha.languagelib.LanguageLib;
+import dev.notcacha.languagelib.bungee.BungeeLanguageLib;
+import dev.notcacha.languagelib.message.TranslateMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -9,12 +10,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class LanguageTranslateMessage implements TranslateMessage {
 
     private final String path;
-    private final LanguageLib languageLib;
+    private final BungeeLanguageLib bungeeLanguageLib;
     private final Map<String, String> variables;
 
-    public LanguageTranslateMessage(@NotNull String path, @NotNull LanguageLib languageLib) {
+    public LanguageTranslateMessage(@NotNull String path, @NotNull BungeeLanguageLib bungeeLanguageLib) {
         this.path = path;
-        this.languageLib = languageLib;
+        this.bungeeLanguageLib = bungeeLanguageLib;
         this.variables = new ConcurrentHashMap<>();
     }
 
@@ -27,10 +28,10 @@ public class LanguageTranslateMessage implements TranslateMessage {
     public @NotNull String getMessage(@NotNull String language) {
         String messageTranslate;
 
-        if (this.languageLib.getTranslateManager().containsFile(language)) {
-            messageTranslate = this.languageLib.getFile(language).getString(getPath());
+        if (this.bungeeLanguageLib.getTranslateManager().containsFile(language)) {
+            messageTranslate = this.bungeeLanguageLib.getFile(language).getString(getPath());
         } else {
-            messageTranslate = this.languageLib.getDefaultFile().getString(getPath());
+            messageTranslate = this.bungeeLanguageLib.getDefaultFile().getString(getPath());
         }
         for (String key : variables.keySet()) {
             String value = variables.get(key);

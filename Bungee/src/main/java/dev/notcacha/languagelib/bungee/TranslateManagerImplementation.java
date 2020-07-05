@@ -1,18 +1,19 @@
-package dev.notcacha.languagelib;
+package dev.notcacha.languagelib.bungee;
 
-import dev.notcacha.languagelib.message.LanguageTranslateMessage;
+import dev.notcacha.languagelib.TranslateManager;
+import dev.notcacha.languagelib.bungee.message.LanguageTranslateMessage;
 import dev.notcacha.languagelib.message.TranslateMessage;
-import org.bukkit.configuration.file.YamlConfiguration;
+import net.md_5.bungee.config.Configuration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class TranslateManagerImplementation implements TranslateManager {
+public class TranslateManagerImplementation<C extends Configuration> implements TranslateManager<C> {
 
     @NotNull
-    private final LanguageLib languageLib;
+    private final BungeeLanguageLib languageLib;
 
-    public TranslateManagerImplementation(@NotNull LanguageLib languageLib) {
+    public TranslateManagerImplementation(@NotNull BungeeLanguageLib languageLib) {
         this.languageLib = languageLib;
     }
 
@@ -27,7 +28,7 @@ public class TranslateManagerImplementation implements TranslateManager {
     }
 
     @Override
-    public void addFile(@NotNull String language, @NotNull YamlConfiguration configuration) {
+    public void addFile(@NotNull String language, @NotNull C configuration) {
         if (!containsFile(language)) {
             this.languageLib.getFiles().put(language, configuration);
         }

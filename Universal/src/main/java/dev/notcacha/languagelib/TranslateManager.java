@@ -1,12 +1,11 @@
 package dev.notcacha.languagelib;
 
 import dev.notcacha.languagelib.message.TranslateMessage;
-import net.md_5.bungee.config.Configuration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public interface TranslateManager {
+public interface TranslateManager<C> {
 
     /**
      * Returns a class "TranslateMessage", so that we can get the message in a certain language and set variables
@@ -31,7 +30,7 @@ public interface TranslateManager {
      * @param configuration, language file has been added
      */
 
-    void addFile(@NotNull String language, @NotNull Configuration configuration);
+    void addFile(@NotNull String language, @NotNull C configuration);
 
     /**
      * Remove file

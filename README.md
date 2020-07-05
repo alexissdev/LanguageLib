@@ -5,8 +5,7 @@ LanguageLib is a simple language system library, what is sought is to facilitate
 # Important
 to be able to use this library you will have to count the project and install it on your pc with 'mvn install'
 
-# Example of how to use the library
-## Dependencies
+# Dependencies
 
 ```pom
     /* BUKKIT */
@@ -24,17 +23,13 @@ to be able to use this library you will have to count the project and install it
     </dependency>
 ```
 
-I would like to say that this library depends on whether we want to use it in Bukkit or BungeeCord it will depend on a class, on the part of "Bukkit" they have to use a Class that extends from "YamlConfiguration",
-and on the part of BungeeCord a class "Configuration" that is of BungeeCord!
+# Data to emphasize
+Depending on the module they use, it brings its respective class to create its YAML files, obviously they are optional.
+The class in the Bukkit module is called "Configuration" and in the Bungee module they are called "FileManager" and "BaseFileManager".
 
-If you do not have any classes of this styles, here is one for Bukkit and BungeeCord
-
-Bukkit Configuration Class:
-https://pastebin.com/aQptr4DJ
-
-BungeeCord Configuration Class:
-https://pastebin.com/U2qsLNQv
-
+# Important fact
+in case you want to use your own classes, the bukkit module depends on a class that extends "YamlConfiguration",
+and the Bungee module depends on a "Configuration" class that defaults to BungeeCord
 
 # Bukkit Example
 
@@ -43,20 +38,20 @@ https://pastebin.com/U2qsLNQv
 
         private Configuration en_language;
         private Configuration es_language;
-        private LanguageLib languageLib;
+        private BukkitLanguageLib<YamlConfiguration> bukkitLanguageLib;
         
         @Override
         public void onEnable() {
             this.en_language = new Configuration(this, "en_language.yml");
             this.es_language = new Configuration(this, "es_language.yml");
             /* *
-            * The "LanguageLib" parameters is the default language
+            * The "BukkitLanguageLib" parameters is the default language
             * The first parameter is the name of the language
             * The second parameter is the class that extends "Yaml Configuration"
             */
-            languageLib = new LanguageLib("EN", en_language);
-            languageLib.getTranslateManager().addFile("ES", es_language);
-            languageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
+            bukkitLanguageLib = new BukkitLanguageLib<>("EN", en_language);
+            bungeeLanguageLib.getTranslateManager().addFile("ES", es_language);
+            bungeeLanguageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
                 getLogger().info(setVariable("%test%", "testing set variable").getMessage("EN"));
             });
         }       
@@ -70,18 +65,19 @@ https://pastebin.com/U2qsLNQv
         
         private FileManager en_language;
         private FileManager es_language;
+        private BungeeLanguageLib<Configuration> bungeeLanguageLib;
 
         @Override
         public void onEnable() {
             registerFiles();
             /* *
-            * The "LanguageLib" parameters is the default language
+            * The "BungeeLanguageLib" parameters is the default language
             * The first parameter is the name of the language
             * The second parameter has to be a class "Configuration" of BungeeCord
             */
-            languageLib = new LanguageLib("EN", en_language.getFile());
-            languageLib.getTranslateManager().addFile("ES", es_language.getFile());
-            languageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
+            bungeeLanguageLib = new BungeeLanguageLib<>("EN", en_language.getFile());
+            bungeeLanguageLib.getTranslateManager().addFile("ES", es_language.getFile());
+            bungeeLanguageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
                 getLogger().info(setVariable("%test%", "testing set variable").getMessage("EN"));
             });
         }
@@ -98,4 +94,3 @@ https://pastebin.com/U2qsLNQv
 
     }
 ```
-

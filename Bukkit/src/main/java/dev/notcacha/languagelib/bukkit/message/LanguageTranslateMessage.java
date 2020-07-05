@@ -1,6 +1,8 @@
-package dev.notcacha.languagelib.message;
+package dev.notcacha.languagelib.bukkit.message;
 
-import dev.notcacha.languagelib.LanguageLib;
+import dev.notcacha.languagelib.bukkit.BukkitLanguageLib;
+import dev.notcacha.languagelib.message.TranslateMessage;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -9,12 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class LanguageTranslateMessage implements TranslateMessage {
 
     private final String path;
-    private final LanguageLib languageLib;
+    private final BukkitLanguageLib<YamlConfiguration> bukkitLanguageLib;
     private final Map<String, String> variables;
 
-    public LanguageTranslateMessage(@NotNull String path, @NotNull LanguageLib languageLib) {
+    public LanguageTranslateMessage(@NotNull String path, @NotNull BukkitLanguageLib<YamlConfiguration> bukkitLanguageLib) {
         this.path = path;
-        this.languageLib = languageLib;
+        this.bukkitLanguageLib = bukkitLanguageLib;
         this.variables = new ConcurrentHashMap<>();
     }
 
@@ -27,10 +29,10 @@ public class LanguageTranslateMessage implements TranslateMessage {
     public @NotNull String getMessage(@NotNull String language) {
         String messageTranslate;
 
-        if (this.languageLib.getTranslateManager().containsFile(language)) {
-            messageTranslate = this.languageLib.getFile(language).getString(getPath());
+        if (this.bukkitLanguageLib.getTranslateManager().containsFile(language)) {
+            messageTranslate = this.bukkitLanguageLib.getFile(language).getString(getPath());
         } else {
-            messageTranslate = this.languageLib.getDefaultFile().getString(getPath());
+            messageTranslate = this.bukkitLanguageLib.getDefaultFile().getString(getPath());
         }
         for (String key : variables.keySet()) {
             String value = variables.get(key);

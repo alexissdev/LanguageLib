@@ -29,4 +29,5 @@ public interface TranslateMessage {
 
     @NotNull
     TranslateMessage setVariable(@NotNull String key, @NotNull String value);
+
 }
