@@ -40,11 +40,7 @@ public class LanguageTranslatableMessage implements TranslatableMessage {
             messageTranslate = messageTranslate.replace(key, value);
         }
 
-        try {
-            return messageTranslate;
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Path '" + getPath() + "' not found please check path");
-        }
+        return messageTranslate;
     }
 
     @Override
@@ -62,11 +58,7 @@ public class LanguageTranslatableMessage implements TranslatableMessage {
             messageTranslate.replaceAll(message -> message.replace(key, value));
         }
 
-        try {
-            return messageTranslate;
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Path '" + getPath() + "' not found please check path");
-        }
+        return messageTranslate;
     }
 
     @Override

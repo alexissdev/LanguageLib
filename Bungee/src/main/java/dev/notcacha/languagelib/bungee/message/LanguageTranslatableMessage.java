@@ -40,11 +40,7 @@ public class LanguageTranslatableMessage implements TranslatableMessage {
             messageTranslate = messageTranslate.replace(key, value);
         }
 
-        try {
-            return messageTranslate;
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Path '" + getPath() + "' not found please check path");
-        }
+        return messageTranslate;
     }
 
     @NotNull
@@ -63,22 +59,13 @@ public class LanguageTranslatableMessage implements TranslatableMessage {
             messageTranslate.replaceAll(message -> message.replace(key, value));
         }
 
-        try {
-            return messageTranslate;
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Path '" + getPath() + "' not found please check path");
-        }
+        return messageTranslate;
     }
 
     @Override
     public @NotNull TranslatableMessage setVariable(@NotNull String key, @NotNull String value) {
         this.variables.put(key, value);
         return this;
-    }
-
-    private boolean isList(Configuration file, String path) {
-        Object val = file.get(path);
-        return val instanceof List;
     }
 
 }
