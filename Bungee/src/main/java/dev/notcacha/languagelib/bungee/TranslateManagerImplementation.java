@@ -1,8 +1,8 @@
 package dev.notcacha.languagelib.bungee;
 
 import dev.notcacha.languagelib.TranslateManager;
-import dev.notcacha.languagelib.bungee.message.LanguageTranslateMessage;
-import dev.notcacha.languagelib.message.TranslateMessage;
+import dev.notcacha.languagelib.bungee.message.LanguageTranslatableMessage;
+import dev.notcacha.languagelib.message.TranslatableMessage;
 import net.md_5.bungee.config.Configuration;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,8 +18,8 @@ public class TranslateManagerImplementation<C extends Configuration> implements 
     }
 
     @Override
-    public Optional<TranslateMessage> getTranslate(@NotNull String path) {
-        return Optional.ofNullable(languageLib.getDefaultFile().getString(path,null)).map(string -> new LanguageTranslateMessage(path,languageLib));
+    public Optional<TranslatableMessage> getTranslate(@NotNull String path) {
+        return Optional.ofNullable(languageLib.getDefaultFile().getString(path,null)).map(string -> new LanguageTranslatableMessage(path,languageLib));
     }
 
     @Override

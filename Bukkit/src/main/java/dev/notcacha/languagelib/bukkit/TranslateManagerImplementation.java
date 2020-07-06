@@ -1,8 +1,8 @@
 package dev.notcacha.languagelib.bukkit;
 
 import dev.notcacha.languagelib.TranslateManager;
-import dev.notcacha.languagelib.bukkit.message.LanguageTranslateMessage;
-import dev.notcacha.languagelib.message.TranslateMessage;
+import dev.notcacha.languagelib.bukkit.message.LanguageTranslatableMessage;
+import dev.notcacha.languagelib.message.TranslatableMessage;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,8 +18,8 @@ public class TranslateManagerImplementation<C extends YamlConfiguration> impleme
     }
 
     @Override
-    public Optional<TranslateMessage> getTranslate(@NotNull String path) {
-        return Optional.ofNullable(bukkitLanguageLib.getDefaultFile().getString(path,null)).map(string -> new LanguageTranslateMessage(path, bukkitLanguageLib));
+    public Optional<TranslatableMessage> getTranslate(@NotNull String path) {
+        return Optional.ofNullable(bukkitLanguageLib.getDefaultFile().getString(path,null)).map(string -> new LanguageTranslatableMessage(path, bukkitLanguageLib));
     }
 
     @Override

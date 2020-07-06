@@ -3,6 +3,8 @@ package dev.notcacha.languagelib.bungee.file;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.config.Configuration;
 
+import java.util.List;
+
 public interface FileManager {
 
     /**
@@ -74,4 +76,5 @@ public interface FileManager {
     default String getString(String path){
         return getFile().contains(path) ? getFile().getString(path) : "";
     }
+
 }

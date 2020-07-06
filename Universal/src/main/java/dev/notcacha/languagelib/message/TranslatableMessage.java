@@ -2,7 +2,9 @@ package dev.notcacha.languagelib.message;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface TranslateMessage {
+import java.util.List;
+
+public interface TranslatableMessage {
 
     /**
      * Get path of message
@@ -21,6 +23,15 @@ public interface TranslateMessage {
     String getMessage(@NotNull String language);
 
     /**
+     * Get message from path
+     *
+     * @param language, the language in which to search for the message
+     */
+
+    @NotNull
+    List<String> getMessages(@NotNull String language);
+
+    /**
      * Set variables to message
      *
      * @param key, message to replace
@@ -28,6 +39,6 @@ public interface TranslateMessage {
      */
 
     @NotNull
-    TranslateMessage setVariable(@NotNull String key, @NotNull String value);
+    TranslatableMessage setVariable(@NotNull String key, @NotNull String value);
 
 }

@@ -12,14 +12,14 @@ to be able to use this library you will have to count the project and install it
     <dependency>
        <groupId>dev.notcacha</groupId>
        <artifactId>LanguageLib-Bukkit</artifactId>
-       <version>1.1-SNAPSHOT</version>
+       <version>1.2-SNAPSHOT</version>
     </dependency>
 
     /* BungeeCord */
     <dependency>
        <groupId>dev.notcacha</groupId>
        <artifactId>LanguageLib-Bungee</artifactId>
-       <version>1.1-SNAPSHOT</version>
+       <version>1.2-SNAPSHOT</version>
     </dependency>
 ```
 
@@ -50,9 +50,18 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * The second parameter is the class that extends "Yaml Configuration"
             */
             bukkitLanguageLib = new BukkitLanguageLib<>("EN", en_language);
-            bungeeLanguageLib.getTranslateManager().addFile("ES", es_language);
-            bungeeLanguageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
-                getLogger().info(setVariable("%test%", "testing set variable").getMessage("EN"));
+            bungebukkitLanguageLibeLanguageLib.getTranslateManager().addFile("ES", es_language);
+            /* *
+            * This is a simple example for a simple path that is 1 single string
+            */
+            bukkitLanguageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
+                getLogger().info(message.setVariable("%test%", "testing set variable").getMessage("EN"));
+            });
+            /* *
+            * This is an example in any case we want to use a list
+            */
+            bukkitLanguageLib.getTranslateManager().getTranslate("Messages.apagando-list").ifPresent(message -> {
+                message.setVariable("%test%", "testing set variable").getMessages("ES").forEach(resultMessage -> getLogger().info(resultMessage));
             });
         }       
     }   
@@ -77,8 +86,17 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             */
             bungeeLanguageLib = new BungeeLanguageLib<>("EN", en_language.getFile());
             bungeeLanguageLib.getTranslateManager().addFile("ES", es_language.getFile());
+            /* *
+            * This is a simple example for a simple path that is 1 single string
+            */
             bungeeLanguageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
                 getLogger().info(setVariable("%test%", "testing set variable").getMessage("EN"));
+            });
+            /* *
+            * This is an example in any case we want to use a list
+            */
+            bungeeLanguageLib.getTranslateManager().getTranslate("Messages.apagando-list").ifPresent(message -> {
+                message.setVariable("%test%", "testing set variable").getMessages("ES").forEach(resultMessage -> getLogger().info(resultMessage));
             });
         }
     

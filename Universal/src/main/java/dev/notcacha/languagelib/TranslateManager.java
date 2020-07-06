@@ -1,6 +1,6 @@
 package dev.notcacha.languagelib;
 
-import dev.notcacha.languagelib.message.TranslateMessage;
+import dev.notcacha.languagelib.message.TranslatableMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -8,12 +8,12 @@ import java.util.Optional;
 public interface TranslateManager<C> {
 
     /**
-     * Returns a class "TranslateMessage", so that we can get the message in a certain language and set variables
+     * Returns a class "TranslatableMessage", so that we can get the message in a certain language and set variables
      *
      * @param path, path to be obtained from the specified language file
      */
 
-    Optional<TranslateMessage> getTranslate(@NotNull String path);
+    Optional<TranslatableMessage> getTranslate(@NotNull String path);
 
     /**
      * Returns if there is a file of a certain language
