@@ -50,7 +50,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * The second parameter is the class that extends "Yaml Configuration"
             */
             bukkitLanguageLib = new BukkitLanguageLib<>("EN", en_language);
-            bungebukkitLanguageLibeLanguageLib.getTranslateManager().addFile("ES", es_language);
+            bukkitLanguageLib.getTranslateManager().addFile("ES", es_language);
             /* *
             * This is a simple example for a simple path that is 1 single string
             */
