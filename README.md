@@ -50,7 +50,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * The second parameter is the class that extends "Yaml Configuration"
             */
             bukkitLanguageLib = new BukkitLanguageLib<>("EN", en_language);
-            bukkitLanguageLib.getTranslateManager().addFile("ES", es_language);
+            bukkitLanguageLib.getTranslateManager().addFile("EN", es_language);
             /* *
             * This is a simple example for a simple path that is 1 single string
             */
@@ -61,7 +61,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * This is an example in any case we want to use a list
             */
             bukkitLanguageLib.getTranslateManager().getTranslate("Messages.apagando-list").ifPresent(message -> {
-                message.setVariable("%test%", "testing set variable").getMessages("ES").forEach(resultMessage -> getLogger().info(resultMessage));
+                message.setVariable("%test%", "testing set variable").getMessages("EN").forEach(resultMessage -> getLogger().info(resultMessage));
             });
         }       
     }   
