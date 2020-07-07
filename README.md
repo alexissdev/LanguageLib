@@ -38,7 +38,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
 
         private Configuration en_language;
         private Configuration es_language;
-        private BukkitLanguageLib<YamlConfiguration> bukkitLanguageLib;
+        private LanguageLib<YamlConfiguration> bukkitLanguageLib;
         
         @Override
         public void onEnable() {
@@ -74,7 +74,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
         
         private FileManager en_language;
         private FileManager es_language;
-        private BungeeLanguageLib<Configuration> bungeeLanguageLib;
+        private LanguageLib<Configuration> bungeeLanguageLib;
 
         @Override
         public void onEnable() {
