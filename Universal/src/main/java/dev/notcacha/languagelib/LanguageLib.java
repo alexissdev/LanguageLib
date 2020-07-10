@@ -1,40 +1,26 @@
 package dev.notcacha.languagelib;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
+import dev.notcacha.languagelib.managers.FilesManager;
+import dev.notcacha.languagelib.managers.TranslationManager;
 
 /**
- * @param <C>represents the configuration file to be used, for example in Bukkit "YamlConfiguration"
+ * @param <C> represents the configuration file to be used, for example in Bukkit "YamlConfiguration"
  * is used and in BungeeCord "Configuration"
- * */
+ */
 
 public interface LanguageLib<C> {
-
-    /**
-     * Get all languages files
-     */
-
-    Map<String, C> getFiles();
-
-    /**
-     * Get a specific language file
-     *
-     * @param language, language name to obtain its respective file
-     */
-
-    C getFile(@NotNull String language);
 
     /**
      * The class that is responsible for creating messages and files
      */
 
-    TranslateManager<C> getTranslateManager();
+    TranslationManager getTranslationManager();
 
     /**
-     * Get the default language
+     * Get File Manager
      */
 
-    C getDefaultFile();
+    FilesManager<C> getFileManager();
+
 
 }

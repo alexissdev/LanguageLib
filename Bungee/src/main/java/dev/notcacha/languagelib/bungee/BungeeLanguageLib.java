@@ -1,43 +1,29 @@
 package dev.notcacha.languagelib.bungee;
 
 import dev.notcacha.languagelib.LanguageLib;
-import dev.notcacha.languagelib.TranslateManager;
+import dev.notcacha.languagelib.bungee.managers.BungeeFileManager;
+import dev.notcacha.languagelib.bungee.managers.BungeeTranslateManager;
+import dev.notcacha.languagelib.managers.FilesManager;
+import dev.notcacha.languagelib.managers.TranslationManager;
 import net.md_5.bungee.config.Configuration;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class BungeeLanguageLib<C extends Configuration> implements LanguageLib<C> {
 
-    private final C defaultFile;
-    private final Map<String, C> files;
-    private final TranslateManager<C> translateManager;
+    private final TranslationManager translateManager;
+    private final FilesManager<C> filesManager;
 
-    public BungeeLanguageLib(@NotNull String defaultLanguage, @NotNull C defaultFile) {
-        this.files = new HashMap<>();
-        this.defaultFile = defaultFile;
-        this.files.put(defaultLanguage, defaultFile);
-        this.translateManager = new TranslateManagerImplementation<>(this);
+    public BungeeLanguageLib(C defaultFile) {
+        this.filesManager = new BungeeFileManager<>(defaultFile);
+        this.translateManager = new BungeeTranslateManager(this);
     }
 
     @Override
-    public Map<String, C> getFiles() {
-        return this.files;
-    }
-
-    @Override
-    public C getFile(@NotNull String language) {
-        return this.files.get(language);
-    }
-
-    @Override
-    public TranslateManager<C> getTranslateManager() {
+    public TranslationManager getTranslationManager() {
         return this.translateManager;
     }
 
     @Override
-    public C getDefaultFile() {
-        return this.defaultFile;
+    public FilesManager<C> getFileManager() {
+        return this.filesManager;
     }
 }

@@ -1,6 +1,7 @@
 package dev.notcacha.languagelib.message;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface TranslatableMessage {
      */
 
     @NotNull
-    String getMessage(@NotNull String language);
+    String getMessage(String language);
 
     /**
      * Get message from path
@@ -29,7 +30,7 @@ public interface TranslatableMessage {
      */
 
     @NotNull
-    List<String> getMessages(@NotNull String language);
+    List<String> getMessages(String language);
 
     /**
      * Set variables to message
@@ -39,6 +40,14 @@ public interface TranslatableMessage {
      */
 
     @NotNull
-    TranslatableMessage setVariable(@NotNull String key, @NotNull String value);
+    TranslatableMessage setVariable(@NotNull String key, @Nullable String value);
+
+    /**
+     * Set color from message
+     * @param use boolean value
+     * */
+
+    @NotNull
+    TranslatableMessage setColor(boolean setColor);
 
 }

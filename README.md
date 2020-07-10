@@ -12,14 +12,14 @@ to be able to use this library you will have to count the project and install it
     <dependency>
        <groupId>dev.notcacha</groupId>
        <artifactId>LanguageLib-Bukkit</artifactId>
-       <version>1.2-SNAPSHOT</version>
+       <version>1.3-SNAPSHOT</version>
     </dependency>
 
     /* BungeeCord */
     <dependency>
        <groupId>dev.notcacha</groupId>
        <artifactId>LanguageLib-Bungee</artifactId>
-       <version>1.2-SNAPSHOT</version>
+       <version>1.3-SNAPSHOT</version>
     </dependency>
 ```
 
@@ -28,8 +28,8 @@ Depending on the module they use, it brings its respective class to create its Y
 The class in the Bukkit module is called "Configuration" and in the Bungee module they are called "FileManager" and "BaseFileManager".
 
 # Important fact
-in case you want to use your own classes, the bukkit module depends on a class that extends "YamlConfiguration",
-and the Bungee module depends on a "Configuration" class that defaults to BungeeCord
+in case you want to use your own classes, the bukkit module depends on a class that extends "Configuration",
+and the Bungee module depends on a "Configuration" class that defaults to BungeeCord 
 
 # Bukkit Example
 
@@ -49,19 +49,25 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * The first parameter is the name of the language
             * The second parameter is the class that extends "Yaml Configuration"
             */
-            bukkitLanguageLib = new BukkitLanguageLib<>("EN", en_language);
-            bukkitLanguageLib.getTranslateManager().addFile("EN", es_language);
+            bukkitLanguageLib = new BukkitLanguageLib<>(en_language);
+            bukkitLanguageLib.getFileManager().addFile("EN", es_language);
             /* *
             * This is a simple example for a simple path that is 1 single string
             */
-            bukkitLanguageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
+            bukkitLanguageLib.getTranslationManager().getTranslation("messages.test").ifPresent(message -> {
                 getLogger().info(message.setVariable("%test%", "testing set variable").getMessage("EN"));
             });
             /* *
             * This is an example in any case we want to use a list
             */
-            bukkitLanguageLib.getTranslateManager().getTranslate("Messages.apagando-list").ifPresent(message -> {
+            bukkitLanguageLib.getTranslationManager().getTranslation("Messages.apagando-list").ifPresent(message -> {
                 message.setVariable("%test%", "testing set variable").getMessages("EN").forEach(resultMessage -> getLogger().info(resultMessage));
+            });
+            /* *
+            * We can also activate the option to return the message in colors as follows
+            */
+            bukkitLanguageLib.getTranslationManager().getTranslation("messages.test").ifPresent(message -> {
+                getServer().getConsoleSender().sendMessage(message.setVariable("%test%", "testing set variable").setColor(true).getMessage("EN"));
             });
         }       
     }   
@@ -84,20 +90,11 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * The first parameter is the name of the language
             * The second parameter has to be a class "Configuration" of BungeeCord
             */
-            bungeeLanguageLib = new BungeeLanguageLib<>("EN", en_language.getFile());
-            bungeeLanguageLib.getTranslateManager().addFile("ES", es_language.getFile());
+            bungeeLanguageLib = new BungeeLanguageLib<>(en_language.getFile());
+            bungeeLanguageLib.getFileManager().addFile("ES", es_language.getFile());
             /* *
-            * This is a simple example for a simple path that is 1 single string
+            * The way to send messages in the same way in the two modules, so that did not change, the only thing that changes is the variable when registering the library.
             */
-            bungeeLanguageLib.getTranslateManager().getTranslate("messages.test").ifPresent(message -> {
-                getLogger().info(setVariable("%test%", "testing set variable").getMessage("EN"));
-            });
-            /* *
-            * This is an example in any case we want to use a list
-            */
-            bungeeLanguageLib.getTranslateManager().getTranslate("Messages.apagando-list").ifPresent(message -> {
-                message.setVariable("%test%", "testing set variable").getMessages("ES").forEach(resultMessage -> getLogger().info(resultMessage));
-            });
         }
     
         private void registerFiles() {
