@@ -4,21 +4,19 @@ import dev.notcacha.languagelib.bungee.BungeeLanguageLib;
 import dev.notcacha.languagelib.managers.TranslationManager;
 import dev.notcacha.languagelib.bungee.message.BungeeTranslatableMessage;
 import dev.notcacha.languagelib.message.TranslatableMessage;
-import net.md_5.bungee.config.Configuration;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
 public class BungeeTranslateManager implements TranslationManager {
 
-    private final BungeeLanguageLib<Configuration> languageLib;
+    private final BungeeLanguageLib bungeeLanguageLib;
 
-    public BungeeTranslateManager(BungeeLanguageLib languageLib) {
-        this.languageLib = languageLib;
+    public BungeeTranslateManager(BungeeLanguageLib bungeeLanguageLib) {
+        this.bungeeLanguageLib = bungeeLanguageLib;
     }
 
     @Override
-    public Optional<TranslatableMessage> getTranslation(@NotNull String path) {
-        return Optional.ofNullable(languageLib.getFileManager().getDefaultFile().getString(path,null)).map(string -> new BungeeTranslatableMessage(path,languageLib));
+    public Optional<TranslatableMessage> getTranslation(String path) {
+        return Optional.ofNullable(bungeeLanguageLib.getFileManager().getDefaultFile().getString(path,null)).map(string -> new BungeeTranslatableMessage(path,bungeeLanguageLib));
     }
 }

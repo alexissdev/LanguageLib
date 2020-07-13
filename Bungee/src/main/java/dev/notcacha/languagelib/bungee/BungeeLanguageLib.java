@@ -7,13 +7,13 @@ import dev.notcacha.languagelib.managers.FilesManager;
 import dev.notcacha.languagelib.managers.TranslationManager;
 import net.md_5.bungee.config.Configuration;
 
-public class BungeeLanguageLib<C extends Configuration> implements LanguageLib<C> {
+public class BungeeLanguageLib implements LanguageLib<Configuration> {
 
     private final TranslationManager translateManager;
-    private final FilesManager<C> filesManager;
+    private final FilesManager<Configuration> filesManager;
 
-    public BungeeLanguageLib(C defaultFile) {
-        this.filesManager = new BungeeFileManager<>(defaultFile);
+    public BungeeLanguageLib(String defaultLanguage, Configuration defaultFile) {
+        this.filesManager = new BungeeFileManager(defaultLanguage, defaultFile);
         this.translateManager = new BungeeTranslateManager(this);
     }
 
@@ -23,7 +23,7 @@ public class BungeeLanguageLib<C extends Configuration> implements LanguageLib<C
     }
 
     @Override
-    public FilesManager<C> getFileManager() {
+    public FilesManager<Configuration> getFileManager() {
         return this.filesManager;
     }
 }

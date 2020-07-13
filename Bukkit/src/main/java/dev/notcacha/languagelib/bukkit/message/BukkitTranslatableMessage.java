@@ -3,7 +3,6 @@ package dev.notcacha.languagelib.bukkit.message;
 import dev.notcacha.languagelib.bukkit.BukkitLanguageLib;
 import dev.notcacha.languagelib.message.TranslatableMessage;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.Configuration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,11 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BukkitTranslatableMessage implements TranslatableMessage {
 
     private final String path;
-    private final BukkitLanguageLib<Configuration> bukkitLanguageLib;
+    private final BukkitLanguageLib bukkitLanguageLib;
     private final Map<String, String> variables;
     private boolean color;
 
-    public BukkitTranslatableMessage(String path, BukkitLanguageLib<Configuration> bukkitLanguageLib) {
+    public BukkitTranslatableMessage(String path, BukkitLanguageLib bukkitLanguageLib) {
         this.path = path;
         this.bukkitLanguageLib = bukkitLanguageLib;
         this.variables = new ConcurrentHashMap<>();

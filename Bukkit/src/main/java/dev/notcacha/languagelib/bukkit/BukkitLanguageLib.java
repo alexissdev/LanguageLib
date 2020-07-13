@@ -7,14 +7,13 @@ import dev.notcacha.languagelib.managers.FilesManager;
 import dev.notcacha.languagelib.managers.TranslationManager;
 import org.bukkit.configuration.Configuration;
 
-
-public class BukkitLanguageLib<C extends Configuration> implements LanguageLib<C> {
+public class BukkitLanguageLib implements LanguageLib<Configuration> {
 
     private final TranslationManager translateManager;
-    private final FilesManager<C> filesManager;
+    private final FilesManager<Configuration> filesManager;
 
-    public BukkitLanguageLib(C defaultFile) {
-        this.filesManager = new BukkitFileManager<>(defaultFile);
+    public BukkitLanguageLib(String defaultLanguage, Configuration defaultFile) {
+        this.filesManager = new BukkitFileManager(defaultLanguage, defaultFile);
         this.translateManager = new BukkitTranslateManager(this);
     }
 
@@ -24,7 +23,7 @@ public class BukkitLanguageLib<C extends Configuration> implements LanguageLib<C
     }
 
     @Override
-    public FilesManager<C> getFileManager() {
+    public FilesManager<Configuration> getFileManager() {
         return this.filesManager;
     }
 }

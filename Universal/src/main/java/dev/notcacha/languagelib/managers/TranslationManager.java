@@ -13,6 +13,6 @@ public interface TranslationManager {
      * @param path, path to be obtained from the specified language file
      */
 
-    Optional<TranslatableMessage> getTranslation(@NotNull String path);
+    Optional<TranslatableMessage> getTranslation(String path);
 
 }

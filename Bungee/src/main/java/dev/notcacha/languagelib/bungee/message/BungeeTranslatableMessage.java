@@ -3,7 +3,6 @@ package dev.notcacha.languagelib.bungee.message;
 import dev.notcacha.languagelib.bungee.BungeeLanguageLib;
 import dev.notcacha.languagelib.message.TranslatableMessage;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.config.Configuration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,11 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BungeeTranslatableMessage implements TranslatableMessage {
 
     private final String path;
-    private final BungeeLanguageLib<Configuration> bungeeLanguageLib;
+    private final BungeeLanguageLib bungeeLanguageLib;
     private final Map<String, String> variables;
     private boolean color;
 
-    public BungeeTranslatableMessage(@NotNull String path, @NotNull BungeeLanguageLib<Configuration> bungeeLanguageLib) {
+    public BungeeTranslatableMessage(@NotNull String path, @NotNull BungeeLanguageLib bungeeLanguageLib) {
         this.path = path;
         this.bungeeLanguageLib = bungeeLanguageLib;
         this.variables = new ConcurrentHashMap<>();
@@ -55,12 +54,11 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
     public List<String> getMessages(String language) {
         List<String> messageTranslate;
 
-        if (language != null &&  this.bungeeLanguageLib.getFileManager().containsFile(language)) {
+        if (language != null && this.bungeeLanguageLib.getFileManager().containsFile(language)) {
             messageTranslate = this.bungeeLanguageLib.getFileManager().getFile(language).getStringList(getPath());
         } else {
             messageTranslate = this.bungeeLanguageLib.getFileManager().getDefaultFile().getStringList(getPath());
         }
-
         for (String key : variables.keySet()) {
             String value = variables.get(key);
             messageTranslate.replaceAll(message -> message.replace(key, value));

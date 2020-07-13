@@ -38,7 +38,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
 
         private Configuration en_language;
         private Configuration es_language;
-        private LanguageLib<YamlConfiguration> bukkitLanguageLib;
+        private LanguageLib bukkitLanguageLib;
         
         @Override
         public void onEnable() {
@@ -47,10 +47,10 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             /* *
             * The "BukkitLanguageLib" parameters is the default language
             * The first parameter is the name of the language
-            * The second parameter is the class that extends "Yaml Configuration"
+            * The second parameter is the class that extends "Yaml Configuration" or "Configuration" class
             */
-            bukkitLanguageLib = new BukkitLanguageLib<>(en_language);
-            bukkitLanguageLib.getFileManager().addFile("EN", es_language);
+            bukkitLanguageLib = new BukkitLanguageLib<>("EN", en_language);
+            bukkitLanguageLib.getFileManager().addFile("ES", es_language);
             /* *
             * This is a simple example for a simple path that is 1 single string
             */
@@ -80,7 +80,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
         
         private FileManager en_language;
         private FileManager es_language;
-        private LanguageLib<Configuration> bungeeLanguageLib;
+        private LanguageLib bungeeLanguageLib;
 
         @Override
         public void onEnable() {
@@ -90,7 +90,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * The first parameter is the name of the language
             * The second parameter has to be a class "Configuration" of BungeeCord
             */
-            bungeeLanguageLib = new BungeeLanguageLib<>(en_language.getFile());
+            bungeeLanguageLib = new BungeeLanguageLib("EN", en_language.getFile());
             bungeeLanguageLib.getFileManager().addFile("ES", es_language.getFile());
             /* *
             * The way to send messages in the same way in the two modules, so that did not change, the only thing that changes is the variable when registering the library.
