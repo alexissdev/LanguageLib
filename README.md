@@ -38,7 +38,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
 
         private Configuration en_language;
         private Configuration es_language;
-        private LanguageLib bukkitLanguageLib;
+        private BukkitLanguageLib bukkitLanguageLib;
         
         @Override
         public void onEnable() {
@@ -49,7 +49,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
             * The first parameter is the name of the language
             * The second parameter is the class that extends "Yaml Configuration" or "Configuration" class
             */
-            bukkitLanguageLib = new BukkitLanguageLib<>("EN", en_language);
+            bukkitLanguageLib = new BukkitLanguageLib("EN", en_language);
             bukkitLanguageLib.getFileManager().addFile("ES", es_language);
             /* *
             * This is a simple example for a simple path that is 1 single string
@@ -80,7 +80,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
         
         private FileManager en_language;
         private FileManager es_language;
-        private LanguageLib bungeeLanguageLib;
+        private BungeeLanguageLib bungeeLanguageLib;
 
         @Override
         public void onEnable() {
