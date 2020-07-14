@@ -3,9 +3,12 @@ package dev.notcacha.languagelib.bungee.message;
 import dev.notcacha.languagelib.bungee.BungeeLanguageLib;
 import dev.notcacha.languagelib.message.TranslatableMessage;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,7 +48,6 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
         if (color) {
             return ChatColor.translateAlternateColorCodes('&', messageTranslate);
         }
-
         return messageTranslate;
     }
 
@@ -53,7 +55,6 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
     @Override
     public List<String> getMessages(String language) {
         List<String> messageTranslate;
-
         if (language != null && this.bungeeLanguageLib.getFileManager().containsFile(language)) {
             messageTranslate = this.bungeeLanguageLib.getFileManager().getFile(language).getStringList(getPath());
         } else {
