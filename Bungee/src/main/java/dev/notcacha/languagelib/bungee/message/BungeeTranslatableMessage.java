@@ -3,12 +3,9 @@ package dev.notcacha.languagelib.bungee.message;
 import dev.notcacha.languagelib.bungee.BungeeLanguageLib;
 import dev.notcacha.languagelib.message.TranslatableMessage;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

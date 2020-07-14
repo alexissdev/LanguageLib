@@ -44,7 +44,7 @@ public interface TranslatableMessage {
 
     /**
      * Set color from message
-     * @param use boolean value
+     * @param setColor boolean value
      * */
 
     @NotNull
