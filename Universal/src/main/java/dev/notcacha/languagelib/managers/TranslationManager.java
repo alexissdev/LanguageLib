@@ -1,7 +1,6 @@
 package dev.notcacha.languagelib.managers;
 
 import dev.notcacha.languagelib.message.TranslatableMessage;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
