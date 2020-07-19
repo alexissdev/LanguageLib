@@ -2,10 +2,10 @@
 
 LanguageLib is a simple language system library, what is sought is to facilitate the use of multi-languages ​​in the plugins of the programmer who wants to use this library.
 
-# Important
+## Important
 to be able to use this library you will have to count the project and install it on your pc with 'mvn install'
 
-# Dependencies
+## Dependencies
 
 ```pom
     /* BUKKIT */
@@ -23,15 +23,15 @@ to be able to use this library you will have to count the project and install it
     </dependency>
 ```
 
-# Data to emphasize
+## Data to emphasize
 Depending on the module they use, it brings its respective class to create its YAML files, obviously they are optional.
 The class in the Bukkit module is called "Configuration" and in the Bungee module they are called "FileManager" and "BaseFileManager".
 
-# Important fact
+## Important fact
 in case you want to use your own classes, the bukkit module depends on a class that extends "Configuration",
 and the Bungee module depends on a "Configuration" class that defaults to BungeeCord 
 
-# Bukkit Example
+## Bukkit Example
 
 ```java
     public class Main extends JavaPlugin {
@@ -74,7 +74,7 @@ and the Bungee module depends on a "Configuration" class that defaults to Bungee
     }   
 ```
 
-# BungeeCord Example
+## BungeeCord Example
 
 ```java
     public class Main extends Plugin {

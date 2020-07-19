@@ -4,7 +4,6 @@ import dev.notcacha.languagelib.bungee.BungeeLanguageLib;
 import dev.notcacha.languagelib.message.TranslatableMessage;
 import net.md_5.bungee.api.ChatColor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -17,20 +16,21 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
     private final Map<String, String> variables;
     private boolean color;
 
-    public BungeeTranslatableMessage(@NotNull String path, @NotNull BungeeLanguageLib bungeeLanguageLib) {
+    public BungeeTranslatableMessage(String path, BungeeLanguageLib bungeeLanguageLib) {
         this.path = path;
         this.bungeeLanguageLib = bungeeLanguageLib;
         this.variables = new ConcurrentHashMap<>();
         this.color = false;
     }
 
+    @NotNull
     @Override
-    public @NotNull String getPath() {
+    public String getPath() {
         return this.path;
     }
 
     @Override
-    public @NotNull String getMessage(String language) {
+    public String getMessage(String language) {
         String messageTranslate;
 
         if (language != null && this.bungeeLanguageLib.getFileManager().containsFile(language)) {
@@ -48,7 +48,6 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
         return messageTranslate;
     }
 
-    @NotNull
     @Override
     public List<String> getMessages(String language) {
         List<String> messageTranslate;
@@ -68,7 +67,7 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
     }
 
     @Override
-    public @NotNull TranslatableMessage setVariable(@NotNull String key, @Nullable String value) {
+    public TranslatableMessage setVariable(String key, String value) {
         if (value == null) {
             this.variables.remove(key);
         } else {

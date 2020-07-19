@@ -4,7 +4,6 @@ import dev.notcacha.languagelib.bukkit.BukkitLanguageLib;
 import dev.notcacha.languagelib.message.TranslatableMessage;
 import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -24,13 +23,14 @@ public class BukkitTranslatableMessage implements TranslatableMessage {
         this.color = false;
     }
 
+    @NotNull
     @Override
-    public @NotNull String getPath() {
+    public String getPath() {
         return this.path;
     }
 
     @Override
-    public @NotNull String getMessage(String language) {
+    public String getMessage(String language) {
         String messageTranslate;
 
         if (language != null && this.bukkitLanguageLib.getFileManager().containsFile(language)) {
@@ -50,7 +50,7 @@ public class BukkitTranslatableMessage implements TranslatableMessage {
     }
 
     @Override
-    public @NotNull List<String> getMessages(String language) {
+    public List<String> getMessages(String language) {
         List<String> messageTranslate;
 
         if (language != null && this.bukkitLanguageLib.getFileManager().containsFile(language)) {
@@ -72,7 +72,7 @@ public class BukkitTranslatableMessage implements TranslatableMessage {
     }
 
     @Override
-    public @NotNull TranslatableMessage setVariable(@NotNull String key, @Nullable String value) {
+    public TranslatableMessage setVariable(String key, String value) {
         if (value == null) {
             this.variables.remove(key);
         } else {
@@ -81,7 +81,6 @@ public class BukkitTranslatableMessage implements TranslatableMessage {
         return this;
     }
 
-    @NotNull
     @Override
     public TranslatableMessage setColor(boolean setColor) {
         this.color = setColor;

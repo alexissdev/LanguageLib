@@ -4,8 +4,7 @@ import dev.notcacha.languagelib.managers.FilesManager;
 import dev.notcacha.languagelib.managers.TranslationManager;
 
 /**
- * @param <C> represents the configuration file to be used, for example in Bukkit "YamlConfiguration"
- * is used and in BungeeCord "Configuration"
+ * @param <C> represents the class called "Configuration" from the Spigot and BungeeCord library
  */
 
 public interface LanguageLib<C> {
