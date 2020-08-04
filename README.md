@@ -1,6 +1,4 @@
-# LanguageLib
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9814fb3efe54628a3a2a6dda0b33617)](https://app.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&utm_medium=referral&utm_content=NotCacha/LanguageLib&utm_campaign=Badge_Grade_Dashboard)
+# LanguageLib [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9814fb3efe54628a3a2a6dda0b33617)](https://app.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&utm_medium=referral&utm_content=NotCacha/LanguageLib&utm_campaign=Badge_Grade_Dashboard)
 
 LanguageLib is a simple language system library, what is sought is to facilitate the use of multi-languages ​​in the plugins of the programmer who wants to use this library.
 
