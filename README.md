@@ -1,26 +1,25 @@
-# LanguageLib [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9814fb3efe54628a3a2a6dda0b33617)](https://app.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&utm_medium=referral&utm_content=NotCacha/LanguageLib&utm_campaign=Badge_Grade_Dashboard)
+# LanguageLib [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9814fb3efe54628a3a2a6dda0b33617)](https://app.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&utm_medium=referral&utm_content=NotCacha/LanguageLib&utm_campaign=Badge_Grade_Dashboard) [![](https://jitpack.io/v/NotCacha/LanguageLib.svg)](https://jitpack.io/#NotCacha/LanguageLib)
 
 LanguageLib is a simple language system library, what is sought is to facilitate the use of multi-languages ​​in the plugins of the programmer who wants to use this library.
 
 ## Important
 to be able to use this library you will have to count the project and install it on your pc with 'mvn install'
 
-## Dependencies
+## Repository
 
 ```pom
-    /* BUKKIT */
-    <dependency>
-       <groupId>dev.notcacha</groupId>
-       <artifactId>LanguageLib-Bukkit</artifactId>
-       <version>1.3-SNAPSHOT</version>
-    </dependency>
-
-    /* BungeeCord */
-    <dependency>
-       <groupId>dev.notcacha</groupId>
-       <artifactId>LanguageLib-Bungee</artifactId>
-       <version>1.3-SNAPSHOT</version>
-    </dependency>
+<repositories>
+   <repository>
+	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+   </repository>
+</repositories>
+	
+<dependency>
+   <groupId>com.github.NotCacha</groupId>
+   <artifactId>LanguageLib</artifactId>
+   <version>1.3-SNAPSHOT</version>
+</dependency>
 ```
 
 ## Data to emphasize
