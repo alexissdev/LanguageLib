@@ -24,8 +24,8 @@ LanguageLib is a simple library to make it easier to handle multi languages
 ##### Create instance
 
 Available implementations:
-  - BukkitLanguageLib
-  - BungeeLanguageLib
+- BukkitLanguageLib
+- BungeeLanguageLib
 
 ````java
 LanguageLib languageLib = new BukkitLanguageLib.builder(your plugin, "language").build();
@@ -135,7 +135,6 @@ translateMessage#addPlaceholders(new PlaceholderTest(), new Placeholder());
 #### Data to take into account
 The default library generates the files in this way "language_% lang% .yml", we can change this in the FileLoader
 %lang% will be replaced by the language that is being loaded
-````java
+```java
 fileLoader#setFormat("language_%lang%.yml")
-````
-
+```
