@@ -4,9 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dev.notcacha</groupId>
-    <artifactId>LanguageLib-Bukkit</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <parent>
+        <artifactId>languagelib</artifactId>
+        <groupId>dev.notcacha.languagelib</groupId>
+        <version>2.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>languagelib-bukkit</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -28,7 +32,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -59,6 +63,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -69,14 +77,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>19.0.0</version>
+            <groupId>dev.notcacha.languagelib</groupId>
+            <artifactId>languagelib-universal</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>dev.notcacha</groupId>
-            <artifactId>LanguageLib-Universal</artifactId>
-            <version>1.3-SNAPSHOT</version>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.10.9</version>
         </dependency>
     </dependencies>
 </project>

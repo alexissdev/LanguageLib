@@ -1,3 +1,7 @@
 .idea
 target
-LanguageLib.iml
+Bukkit/target
+Bukkit/Bukkit.iml
+Universal/target
+Bungee/target
+Bungee/Bungee.iml

@@ -1,74 +1,94 @@
 package dev.notcacha.languagelib.bukkit.message;
 
-import dev.notcacha.languagelib.bukkit.BukkitLanguageLib;
+import dev.notcacha.languagelib.managers.FileManageable;
 import dev.notcacha.languagelib.message.TranslatableMessage;
+import dev.notcacha.languagelib.placeholder.PlaceholderApplier;
 import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BukkitTranslatableMessage implements TranslatableMessage {
 
+    private Object holder;
+
     private final String path;
-    private final BukkitLanguageLib bukkitLanguageLib;
+    private final FileManageable fileManageable;
     private final Map<String, String> variables;
     private boolean color;
 
-    public BukkitTranslatableMessage(String path, BukkitLanguageLib bukkitLanguageLib) {
+    private Set<PlaceholderApplier> placeholdersApplier;
+
+    public BukkitTranslatableMessage(String path, FileManageable fileManageable) {
         this.path = path;
-        this.bukkitLanguageLib = bukkitLanguageLib;
+        this.fileManageable = fileManageable;
         this.variables = new ConcurrentHashMap<>();
         this.color = false;
+        this.placeholdersApplier = new HashSet<>();
+        this.holder = null;
     }
 
-    @NotNull
     @Override
+    @NotNull
     public String getPath() {
         return this.path;
     }
 
     @Override
     public String getMessage(String language) {
-        String messageTranslate;
+        String translateMessage;
 
-        if (language != null && this.bukkitLanguageLib.getFileManager().containsFile(language)) {
-            messageTranslate = this.bukkitLanguageLib.getFileManager().getFile(language).getString(getPath());
+        if (fileManageable.exists(language)) {
+            translateMessage = fileManageable.find(language).getString(getPath());
         } else {
-            messageTranslate = this.bukkitLanguageLib.getFileManager().getDefaultFile().getString(getPath());
+            translateMessage = fileManageable.getDefault().getString(getPath());
         }
+
         for (String key : variables.keySet()) {
             String value = variables.get(key);
-            messageTranslate = messageTranslate.replace(key, value);
-        }
-        if (color) {
-            return ChatColor.translateAlternateColorCodes('&', messageTranslate);
+            translateMessage = translateMessage.replace(key, value);
         }
 
-        return messageTranslate;
+        if (!placeholdersApplier.isEmpty()) {
+            for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
+                translateMessage = placeholderApplier.set(holder, translateMessage);
+            }
+        }
+
+        if (color) {
+            return ChatColor.translateAlternateColorCodes('&', translateMessage);
+        }
+
+        return translateMessage;
     }
 
     @Override
     public List<String> getMessages(String language) {
-        List<String> messageTranslate;
+        List<String> translateMessages;
 
-        if (language != null && this.bukkitLanguageLib.getFileManager().containsFile(language)) {
-            messageTranslate = this.bukkitLanguageLib.getFileManager().getFile(language).getStringList(getPath());
+        if (fileManageable.exists(language)) {
+            translateMessages = fileManageable.find(language).getList(getPath());
         } else {
-            messageTranslate = this.bukkitLanguageLib.getFileManager().getDefaultFile().getStringList(getPath());
+            translateMessages = fileManageable.getDefault().getList(getPath());
         }
 
         for (String key : variables.keySet()) {
             String value = variables.get(key);
-            messageTranslate.replaceAll(message -> message.replace(key, value));
+            translateMessages.replaceAll(message -> message.replace(key, value));
+        }
+
+        if (!placeholdersApplier.isEmpty()) {
+            for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
+                translateMessages.replaceAll(message -> placeholderApplier.set(holder, message));
+            }
         }
 
         if (color) {
-            messageTranslate.replaceAll(message -> message.replace(message, ChatColor.translateAlternateColorCodes('&', message)));
+            translateMessages.replaceAll(message -> ChatColor.translateAlternateColorCodes('&', message));
         }
 
-        return messageTranslate;
+        return translateMessages;
     }
 
     @Override
@@ -82,8 +102,26 @@ public class BukkitTranslatableMessage implements TranslatableMessage {
     }
 
     @Override
-    public TranslatableMessage setColor(boolean setColor) {
-        this.color = setColor;
+    public TranslatableMessage setHolder(Object holder) {
+        this.holder = holder;
+        return this;
+    }
+
+    @Override
+    public TranslatableMessage addPlaceholder(PlaceholderApplier placeholder) {
+        this.placeholdersApplier.add(placeholder);
+        return this;
+    }
+
+    @Override
+    public TranslatableMessage setPlaceholders(PlaceholderApplier... placeholders) {
+        this.placeholdersApplier = new HashSet<>(Arrays.asList(placeholders));
+        return this;
+    }
+
+    @Override
+    public TranslatableMessage colorize() {
+        this.color = true;
         return this;
     }
 }

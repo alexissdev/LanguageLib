@@ -1,112 +1,122 @@
-# LanguageLib [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9814fb3efe54628a3a2a6dda0b33617)](https://app.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&utm_medium=referral&utm_content=NotCacha/LanguageLib&utm_campaign=Badge_Grade_Dashboard) [![](https://jitpack.io/v/NotCacha/LanguageLib.svg)](https://jitpack.io/#NotCacha/LanguageLib)
+# LanguageLib
 
-LanguageLib is a simple language system library, what is sought is to facilitate the use of multi-languages ​​in the plugins of the programmer who wants to use this library.
+## Information
+LanguageLib is a simple library to make it easier to handle multi languages
 
-## Important
-to be able to use this library you will have to count the project and install it on your pc with 'mvn install'
+### Repository
+````xml
+````
 
-## Repository
+#### Usage
 
-```pom
-<repositories>
-   <repository>
-	<id>jitpack.io</id>
-	<url>https://jitpack.io</url>
-   </repository>
-</repositories>
-	
-<dependency>
-   <groupId>com.github.NotCacha</groupId>
-   <artifactId>LanguageLib</artifactId>
-   <version>1.3-SNAPSHOT</version>
-</dependency>
-```
+##### Create instance
 
-## Data to emphasize
-Depending on the module they use, it brings its respective class to create its YAML files, obviously they are optional.
-The class in the Bukkit module is called "Configuration" and in the Bungee module they are called "FileManager" and "BaseFileManager".
+Available implementations:
+  - BukkitLanguageLib
+  - BungeeLanguageLib
 
-## Important fact
-in case you want to use your own classes, the bukkit module depends on a class that extends "Configuration",
-and the Bungee module depends on a "Configuration" class that defaults to BungeeCord 
+````java
+LanguageLib languageLib = new BukkitLanguageLib.builder(your plugin, "language").build();
+````
 
-## Bukkit Example
+In any case, those who want to put their own implementations can use
+````java
+LanguageLib languageLib = BukkitLanguageLib.builder(plugin, "en")
+                                    .setFileLoader(fileLoader)
+                                    .setFilesManageable(filesManageable)
+                                    .setTranslationManager(translationManager)
+                                    .setI18n(i18n)
+                                    .build();
+````
 
-```java
-    public class Main extends JavaPlugin {
-
-        private Configuration en_language;
-        private Configuration es_language;
-		/* Bukkit Configuration */
-        private LanguageLib<Configuration> bukkitLanguageLib;
-        
-        @Override
-        public void onEnable() {
-            this.en_language = new Configuration(this, "en_language.yml");
-            this.es_language = new Configuration(this, "es_language.yml");
-            /* *
-            * The "BukkitLanguageLib" parameters is the default language
-            * The first parameter is the name of the language
-            * The second parameter is the class that extends "Yaml Configuration" or "Configuration" class
-            */
-            bukkitLanguageLib = new BukkitLanguageLib("EN", en_language);
-            bukkitLanguageLib.getFileManager().addFile("ES", es_language);
-            /* *
-            * This is a simple example for a simple path that is 1 single string
-            */
-            bukkitLanguageLib.getTranslationManager().getTranslation("messages.test").ifPresent(message -> {
-                getLogger().info(message.setVariable("%test%", "testing set variable").getMessage("EN"));
-            });
-            /* *
-            * This is an example in any case we want to use a list
-            */
-            bukkitLanguageLib.getTranslationManager().getTranslation("Messages.apagando-list").ifPresent(message -> {
-                message.setVariable("%test%", "testing set variable").getMessages("EN").forEach(resultMessage -> getLogger().info(resultMessage));
-            });
-            /* *
-            * We can also activate the option to return the message in colors as follows
-            */
-            bukkitLanguageLib.getTranslationManager().getTranslation("messages.test").ifPresent(message -> {
-                getServer().getConsoleSender().sendMessage(message.setVariable("%test%", "testing set variable").setColor(true).getMessage("EN"));
-            });
-        }       
-    }   
-```
-
-## BungeeCord Example
-
-```java
-    public class Main extends Plugin {
-        
-        private FileManager en_language;
-        private FileManager es_language;
-		/* Bungee Configuration */
-        private LanguageLib<Configuration> bungeeLanguageLib;
-
-        @Override
-        public void onEnable() {
-            registerFiles();
-            /* *
-            * The "BungeeLanguageLib" parameters is the default language
-            * The first parameter is the name of the language
-            * The second parameter has to be a class "Configuration" of BungeeCord
-            */
-            bungeeLanguageLib = new BungeeLanguageLib("EN", en_language.getFile());
-            bungeeLanguageLib.getFileManager().addFile("ES", es_language.getFile());
-            /* *
-            * The way to send messages in the same way in the two modules, so that did not change, the only thing that changes is the variable when registering the library.
-            */
-        }
+##### Get simple message
+````java
+public void sendMessage(Player player) {
+    TranslatableMessage translateMessage = languageLib.getTranslationManager().getTranslation("path");
     
-        private void registerFiles() {
-            if (!this.getDataFolder().exists()) {
-                this.getDataFolder().mkdirs();
-            }
-            this.en_language = new BaseFileManager(this, "en_lang.yml", "en_lang.yml");
-            this.en_language.loadDefaultFile(false);
-            this.es_language = new BaseFileManager(this, "es_lang.yml", "es_lang.yml");
-            this.es_language.loadDefaultFile(false);
-        }   
+    // Set variable from message
+    translateMessage.setVariable("%player_name%", player.getName());
 
+    // Set color from message
+    translateMessage.colorize();
+    
+    //Get message
+    String message = translateMessage.getMessage("language");
+
+    player.sendMessage(message);
+}
+````
+
+##### Get list messages
+````java
+public void sendMessages(Player player) {
+    TranslatableMessage translateMessage = languageLib.getTranslationManager().getTranslation("path");
+    
+    // Set variable from messages
+    translateMessage.setVariable("%player_name%", player.getName());
+
+    // Set color from messages
+    translateMessage.colorize();
+    
+    //Get messages in List format
+    List<String> message = translateMessage.getMessages("language");
+
+    message.forEach(player::sendMessage);
+}
+````
+
+#### Placeholders
+
+#### Create your placeholders
+
+##### There are 2 ways available to create placeholders
+
+The first is this
+````java
+public class TestPlaceholderApplier implements PlaceholderApplier {
+
+    public String set(Object holder, String text) {
+          if (holder == null) {
+              return text;
+          }
+          if (!(holder instanceof Player)) {
+              return text;
+          }
+          Player player = (Player) player;
+
+          return text.replace("%player_name%", player.getName());
     }
+}
+````
+
+And the second is this
+````java
+translateMessage#addPlaceholder((holder, text) -> {
+          if (holder == null) {
+              return text;
+          }
+          if (!(holder instanceof Player)) {
+              return text;
+          }
+          Player player = (Player) player;
+
+          return text.replace("%player_name%", player.getName());
+})
+````
+
+#### Add your placeholders from message
+
+##### In order to add them as a placeholder, they have to implement PlaceholderApplier
+
+We can add 1 single placeholder
+
+```java
+translateMessage#addPlaceholder(new YourPlaceholder())
 ```
+
+or multiple
+
+```java
+translateMessage#addPlaceholders(new PlaceholderTest(), new Placeholder());
+```
+
