@@ -1,4 +1,4 @@
-# LanguageLib
+# LanguageLib [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7d0836959bc8471a913a5c0b698a9790)](https://www.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NotCacha/LanguageLib&amp;utm_campaign=Badge_Grade)
 
 ## Information
 LanguageLib is a simple library to make it easier to handle multi languages
