@@ -23,7 +23,7 @@ LanguageLib is a simple library to make it easier to handle multi languages
 
 ##### Create instance
 
-Available implementations [BukkitLanguageLib] (https://github.com/cassha/LanguageLib/blob/2.0/Bukkit/src/main/java/dev/notcacha/languagelib/bukkit/BukkitLanguageLib.java) [BungeeLanguageLib] (https://github.com/cassha/LanguageLib/blob/2.0/Bungee/src/main/java/dev/notcacha/languagelib/bungee/BungeeLanguageLib.java)
+Available implementations is BungeeLanguageLib and BukkitLanguageLib
 
 ````java
 LanguageLib languageLib = new BukkitLanguageLib.builder(your plugin, "language").build();
