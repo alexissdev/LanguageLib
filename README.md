@@ -120,3 +120,10 @@ or multiple
 translateMessage#addPlaceholders(new PlaceholderTest(), new Placeholder());
 ```
 
+#### Data to take into account
+The default library generates the files in this way "language_% lang% .yml", we can change this in the FileLoader
+%lang% will be replaced by the language that is being loaded
+````java
+fileLoader#setFormat("language_%lang%.yml")
+````
+
