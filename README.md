@@ -1,10 +1,22 @@
-# LanguageLib [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7d0836959bc8471a913a5c0b698a9790)](https://www.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NotCacha/LanguageLib&amp;utm_campaign=Badge_Grade)
+# LanguageLib [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7d0836959bc8471a913a5c0b698a9790)](https://www.codacy.com/manual/NotCacha/LanguageLib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NotCacha/LanguageLib&amp;utm_campaign=Badge_Grade) [![](https://jitpack.io/v/cassha/LanguageLib.svg)](https://jitpack.io/#cassha/LanguageLib)
 
 ## Information
 LanguageLib is a simple library to make it easier to handle multi languages
 
 ### Repository
 ````xml
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
+	<dependency>
+	    <groupId>com.github.cassha</groupId>
+	    <artifactId>LanguageLib</artifactId>
+	    <version>2.0-SNAPSHOT</version>
+	</dependency>
 ````
 
 #### Usage
