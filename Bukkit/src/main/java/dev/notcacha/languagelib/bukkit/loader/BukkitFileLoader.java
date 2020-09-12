@@ -7,7 +7,6 @@ import dev.notcacha.languagelib.i18n.I18n;
 import dev.notcacha.languagelib.i18n.message.Message;
 import dev.notcacha.languagelib.loader.FileLoader;
 import org.bukkit.configuration.file.YamlConfiguration;
-
 import java.io.File;
 
 public class BukkitFileLoader implements FileLoader {
@@ -35,4 +34,5 @@ public class BukkitFileLoader implements FileLoader {
 
         return new BukkitLanguageFile(i18n, YamlConfiguration.loadConfiguration(file));
     }
+
 }
