@@ -34,9 +34,7 @@ public class BukkitFileManageable implements FileManageable {
 
     @Override
     public void add(String key) {
-        try {
-            this.fileMap.put(key, fileLoader.load(key, plugin.getDataFolder()));
-        } catch (IOException ignored) {}
+        this.fileMap.put(key, fileLoader.load(key, plugin.getDataFolder()));
     }
 
     @Override

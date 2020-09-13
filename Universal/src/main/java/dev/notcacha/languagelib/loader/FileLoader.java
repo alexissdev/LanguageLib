@@ -20,6 +20,6 @@ public interface FileLoader {
      * @return a file {@link LanguageFile} fully ready to use
      */
 
-    LanguageFile load(String name, File folder) throws IOException;
+    LanguageFile load(String name, File folder);
 
 }

@@ -29,12 +29,16 @@ public class BungeeFileLoader implements FileLoader {
     }
 
     @Override
-    public LanguageFile load(String name, File folder) throws IOException {
+    public LanguageFile load(String name, File folder) {
         File file = new File(folder, format.replace("%lang%", name));
         if (!file.exists()) {
             throw new FileNotFoundException(i18n.getMessage(Message.FILE_NOT_FOUND).replace("%file_name%", name));
         }
 
-        return new BungeeLanguageFile(i18n, ConfigurationProvider.getProvider(YamlConfiguration.class).load(file));
+        try {
+            return new BungeeLanguageFile(i18n, ConfigurationProvider.getProvider(YamlConfiguration.class).load(file));
+        } catch (IOException exception) {
+            throw new IllegalArgumentException(i18n.getMessage(Message.FILE_LOAD_ERROR).replace("%file_name%", name), exception);
+        }
     }
 }

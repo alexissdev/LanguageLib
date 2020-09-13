@@ -15,6 +15,7 @@ public class DefaultI18n implements I18n {
         messageMap.put(Message.MESSAGE_NOT_FOUND, "Message not found, on path %path%");
         messageMap.put(Message.LIST_MESSAGE_NOT_FOUND, "Message list not found, on path %path%");
         messageMap.put(Message.FILE_NOT_FOUND, "The %file_name% file was not found");
+        messageMap.put(Message.FILE_LOAD_ERROR, "An error occurred while trying to load the %file_name% file");
     }
 
     @Override
