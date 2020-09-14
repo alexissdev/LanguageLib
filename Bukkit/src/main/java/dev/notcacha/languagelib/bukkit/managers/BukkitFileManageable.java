@@ -5,7 +5,6 @@ import dev.notcacha.languagelib.loader.FileLoader;
 import dev.notcacha.languagelib.managers.FileManageable;
 import org.bukkit.plugin.Plugin;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,13 +17,17 @@ public class BukkitFileManageable implements FileManageable {
     private final String defaultFile;
 
     public BukkitFileManageable(FileLoader fileLoader, Plugin plugin, String defaultLanguage) {
+        this(fileLoader, plugin, defaultLanguage, false);
+    }
+
+    public BukkitFileManageable(FileLoader fileLoader, Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
         this.fileLoader = fileLoader;
         this.plugin = plugin;
 
         this.defaultFile = defaultLanguage;
         this.fileMap = new HashMap<>();
 
-        add(defaultLanguage);
+        add(defaultLanguage, createDefaultFile);
     }
 
     @Override
@@ -33,8 +36,13 @@ public class BukkitFileManageable implements FileManageable {
     }
 
     @Override
-    public void add(String key) {
-        this.fileMap.put(key, fileLoader.load(key, plugin.getDataFolder()));
+    public void add(String key, boolean create) {
+        if (!create) {
+            this.fileMap.put(key, fileLoader.load(key, plugin.getDataFolder()));
+            return;
+        }
+
+        this.fileMap.put(key, fileLoader.loadAndCreate(key, plugin.getDataFolder()));
     }
 
     @Override

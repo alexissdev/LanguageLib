@@ -22,4 +22,12 @@ public interface FileLoader {
 
     LanguageFile load(String name, File folder);
 
+    /**
+     * This method is almost the same as the previous method, the only difference is that in any case that the file does not exist, it will create it
+     *
+     * @see this#load(String, File);
+     */
+
+    LanguageFile loadAndCreate(String name, File folder);
+
 }

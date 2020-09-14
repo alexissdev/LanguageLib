@@ -5,7 +5,6 @@ import dev.notcacha.languagelib.loader.FileLoader;
 import dev.notcacha.languagelib.managers.FileManageable;
 import net.md_5.bungee.api.plugin.Plugin;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,13 +17,17 @@ public class BungeeFileManageable implements FileManageable {
     private final String defaultFile;
 
     public BungeeFileManageable(FileLoader fileLoader, Plugin plugin, String defaultLanguage) {
+        this(fileLoader, plugin, defaultLanguage, false);
+    }
+
+    public BungeeFileManageable(FileLoader fileLoader, Plugin plugin, String defaultLanguage, boolean createFile) {
         this.fileLoader = fileLoader;
         this.plugin = plugin;
 
         this.defaultFile = defaultLanguage;
         this.fileMap = new HashMap<>();
 
-        add(defaultLanguage);
+        add(defaultLanguage, createFile);
     }
 
     @Override
@@ -33,8 +36,13 @@ public class BungeeFileManageable implements FileManageable {
     }
 
     @Override
-    public void add(String key) {
-        this.fileMap.put(key, fileLoader.load(key, plugin.getDataFolder()));
+    public void add(String key, boolean create) {
+        if (!create) {
+            this.fileMap.put(key, fileLoader.load(key, plugin.getDataFolder()));
+            return;
+        }
+
+        this.fileMap.put(key, fileLoader.loadAndCreate(key, plugin.getDataFolder()));
     }
 
     @Override

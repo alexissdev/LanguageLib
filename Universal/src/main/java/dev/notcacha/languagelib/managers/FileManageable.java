@@ -18,7 +18,18 @@ public interface FileManageable {
      * @param key name from language file
      */
 
-    void add(String key);
+    default void add(String key) {
+        add(key, false);
+    }
+
+    /**
+     * Add file from cache
+     *
+     * @param key name from language file
+     * @param create this represents if the file has to be created or not, in all cases if it is 'true' the file will be created before being loaded otherwise it will only be loaded
+     */
+
+    void add(String key, boolean create);
 
     /**
      * @return an object {@link LanguageFile} using {@param key} to get it

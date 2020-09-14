@@ -53,9 +53,13 @@ public class BungeeLanguageLib implements LanguageLib {
         private I18n i18n;
 
         public Builder(Plugin plugin, String defaultLanguage) {
+            this(plugin, defaultLanguage, false);
+        }
+
+        public Builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
             this.i18n = new DefaultI18n();
-            this.fileLoader = new BungeeFileLoader(i18n);
-            this.fileManageable = new BungeeFileManageable(fileLoader, plugin, defaultLanguage);
+            this.fileLoader = new BungeeFileLoader(plugin, i18n);
+            this.fileManageable = new BungeeFileManageable(fileLoader, plugin, defaultLanguage, createDefaultFile);
             this.translationManager = new BungeeTranslationManager(fileManageable);
         }
 
@@ -89,7 +93,22 @@ public class BungeeLanguageLib implements LanguageLib {
         }
     }
 
+    /**
+     * @see this#builder(Plugin, String, boolean)
+     */
+
     public static LanguageLib.Builder builder(Plugin plugin, String defaultLanguage) {
-        return new Builder(plugin, defaultLanguage);
+        return builder(plugin, defaultLanguage, false);
+    }
+
+    /**
+     * @param plugin from your plugin
+     * @param defaultLanguage file name
+     * @param createDefaultFile whether the value of this parameter will decide if the file has to be created before loading it or not
+     * @return builder from create {@link BungeeLanguageLib}
+     * */
+
+    public static LanguageLib.Builder builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
+        return new Builder(plugin, defaultLanguage, createDefaultFile);
     }
 }

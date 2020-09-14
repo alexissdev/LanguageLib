@@ -53,9 +53,13 @@ public class BukkitLanguageLib implements LanguageLib {
         private I18n i18n;
 
         public Builder(Plugin plugin, String defaultLanguage) {
+            this(plugin, defaultLanguage, false);
+        }
+
+        public Builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
             this.i18n = new DefaultI18n();
-            this.fileLoader = new BukkitFileLoader(i18n);
-            this.fileManageable = new BukkitFileManageable(fileLoader, plugin, defaultLanguage);
+            this.fileLoader = new BukkitFileLoader(plugin, i18n);
+            this.fileManageable = new BukkitFileManageable(fileLoader, plugin, defaultLanguage, createDefaultFile);
             this.translationManager = new BukkitTranslationManager(fileManageable);
         }
 
@@ -89,7 +93,22 @@ public class BukkitLanguageLib implements LanguageLib {
         }
     }
 
+    /**
+     * @see this#builder(Plugin, String, boolean)
+     */
+
     public static LanguageLib.Builder builder(Plugin plugin, String defaultLanguage) {
-        return new BukkitLanguageLib.Builder(plugin, defaultLanguage);
+        return builder(plugin, defaultLanguage, false);
+    }
+
+    /**
+     * @param plugin from your plugin
+     * @param defaultLanguage file name
+     * @param createDefaultFile whether the value of this parameter will decide if the file has to be created before loading it or not
+     * @return builder from {@link BukkitLanguageLib}
+     */
+
+    public static LanguageLib.Builder builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
+        return new BukkitLanguageLib.Builder(plugin, defaultLanguage, createDefaultFile);
     }
 }
