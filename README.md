@@ -13,7 +13,7 @@ LanguageLib is a simple library to make it easier to handle multi languages
 	</repositories>
 
 	<dependency>
-	    <groupId>com.github.cassha</groupId>
+	    <groupId>com.github.cassha.LanguageLib</groupId>
 	    <artifactId>languagelib</artifactId> <!-- languagelib-universal, languagelib-bukkit, languagelib-bungee -->
 	    <version>2.0.2-SNAPSHOT</version>
 	</dependency>
