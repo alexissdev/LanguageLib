@@ -3,9 +3,14 @@ package dev.notcacha.languagelib.loader;
 import dev.notcacha.languagelib.file.LanguageFile;
 
 import java.io.File;
-import java.io.IOException;
 
 public interface FileLoader {
+
+    /**
+     * @return format from languages files
+     */
+
+    String getFormat();
 
     /**
      * {@param format} will be the one established when looking for the file to load it

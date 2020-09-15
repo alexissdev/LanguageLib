@@ -15,7 +15,7 @@ LanguageLib is a simple library to make it easier to handle multi languages
 	<dependency>
 	    <groupId>com.github.cassha</groupId>
 	    <artifactId>languagelib</artifactId> <!-- languagelib-universal, languagelib-bukkit, languagelib-bungee -->
-	    <version>2.0.2-SNAPSHOT</version>
+	    <version>2.0.3-SNAPSHOT</version>
 	</dependency>
 ````
 
@@ -86,9 +86,6 @@ The first is this
 public class TestPlaceholderApplier implements PlaceholderApplier {
 
     public String set(Object holder, String text) {
-          if (holder == null) {
-              return text;
-          }
           if (!(holder instanceof Player)) {
               return text;
           }
@@ -102,9 +99,6 @@ public class TestPlaceholderApplier implements PlaceholderApplier {
 And the second is this
 ````java
 translateMessage#addPlaceholder((holder, text) -> {
-          if (holder == null) {
-              return text;
-          }
           if (!(holder instanceof Player)) {
               return text;
           }

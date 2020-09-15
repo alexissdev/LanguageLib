@@ -59,7 +59,7 @@ public class BukkitLanguageLib implements LanguageLib {
         public Builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
             this.i18n = new DefaultI18n();
             this.fileLoader = new BukkitFileLoader(plugin, i18n);
-            this.fileManageable = new BukkitFileManageable(fileLoader, plugin, defaultLanguage, createDefaultFile);
+            this.fileManageable = new BukkitFileManageable(fileLoader, plugin.getDataFolder(), defaultLanguage, createDefaultFile);
             this.translationManager = new BukkitTranslationManager(fileManageable);
         }
 

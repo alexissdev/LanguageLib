@@ -59,7 +59,7 @@ public class BungeeLanguageLib implements LanguageLib {
         public Builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
             this.i18n = new DefaultI18n();
             this.fileLoader = new BungeeFileLoader(plugin, i18n);
-            this.fileManageable = new BungeeFileManageable(fileLoader, plugin, defaultLanguage, createDefaultFile);
+            this.fileManageable = new BungeeFileManageable(fileLoader, plugin.getDataFolder(), defaultLanguage, createDefaultFile);
             this.translationManager = new BungeeTranslationManager(fileManageable);
         }
 

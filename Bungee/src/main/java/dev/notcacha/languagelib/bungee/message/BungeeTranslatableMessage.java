@@ -54,10 +54,8 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
             translateMessage = translateMessage.replace(key, value);
         }
 
-        if (!placeholdersApplier.isEmpty()) {
-            for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
-                translateMessage = placeholderApplier.set(holder, translateMessage);
-            }
+        for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
+            translateMessage = placeholderApplier.apply(holder, translateMessage);
         }
 
         if (color) {
@@ -82,10 +80,8 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
             translateMessages.replaceAll(message -> message.replace(key, value));
         }
 
-        if (!placeholdersApplier.isEmpty()) {
-            for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
-                translateMessages.replaceAll(message -> placeholderApplier.set(holder, message));
-            }
+        for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
+            translateMessages.replaceAll(message -> placeholderApplier.apply(holder, message));
         }
 
         if (color) {

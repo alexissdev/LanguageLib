@@ -6,7 +6,11 @@ import dev.notcacha.languagelib.placeholder.PlaceholderApplier;
 import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BukkitTranslatableMessage implements TranslatableMessage {
@@ -50,10 +54,8 @@ public class BukkitTranslatableMessage implements TranslatableMessage {
             translateMessage = translateMessage.replace(key, value);
         }
 
-        if (!placeholdersApplier.isEmpty()) {
-            for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
-                translateMessage = placeholderApplier.set(holder, translateMessage);
-            }
+        for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
+            translateMessage = placeholderApplier.apply(holder, translateMessage);
         }
 
         if (color) {
@@ -78,10 +80,8 @@ public class BukkitTranslatableMessage implements TranslatableMessage {
             translateMessages.replaceAll(message -> message.replace(key, value));
         }
 
-        if (!placeholdersApplier.isEmpty()) {
-            for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
-                translateMessages.replaceAll(message -> placeholderApplier.set(holder, message));
-            }
+        for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
+            translateMessages.replaceAll(message -> placeholderApplier.apply(holder, message));
         }
 
         if (color) {

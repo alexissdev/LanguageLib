@@ -8,20 +8,16 @@ import org.bukkit.entity.Player;
 public class PAPIPlaceholderApplier implements PlaceholderApplier {
 
     @Override
-    public String set(Object holder, String text) {
-        if (holder == null) {
-            return text;
-        }
-
+    public String apply(Object holder, String text) {
         if (!(holder instanceof Player)) {
             return text;
         }
 
-        Player player = (Player) holder;
-
         if (!Bukkit.getServer().getPluginManager().getPlugin("PlaceholderAPI").isEnabled()) {
             return text;
         }
+
+        Player player = (Player) holder;
 
         return PlaceholderAPI.setPlaceholders(player, text);
     }

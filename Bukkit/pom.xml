@@ -7,7 +7,7 @@
     <parent>
         <artifactId>languagelib</artifactId>
         <groupId>dev.notcacha.languagelib</groupId>
-        <version>2.0.2-SNAPSHOT</version>
+        <version>2.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>languagelib-bukkit</artifactId>
@@ -79,7 +79,7 @@
         <dependency>
             <groupId>dev.notcacha.languagelib</groupId>
             <artifactId>languagelib-universal</artifactId>
-            <version>2.0.2-SNAPSHOT</version>
+            <version>2.0.3-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

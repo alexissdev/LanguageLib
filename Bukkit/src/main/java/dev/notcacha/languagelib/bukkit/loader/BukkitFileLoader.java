@@ -24,6 +24,11 @@ public class BukkitFileLoader implements FileLoader {
     }
 
     @Override
+    public String getFormat() {
+        return this.format;
+    }
+
+    @Override
     public FileLoader setFormat(String format) {
         this.format = format;
         return this;

@@ -2,20 +2,20 @@ package dev.notcacha.languagelib.managers;
 
 import dev.notcacha.languagelib.file.LanguageFile;
 
-import java.util.Map;
+import java.util.Set;
 
 public interface FileManageable {
 
     /**
-     * @return a {@link Map} with all languages and files set
+     * @return a {@link Set} with all languages files
      */
 
-    Map<String, LanguageFile> get();
+    Set<LanguageFile> get();
 
     /**
      * Add file from cache
      *
-     * @param key name from language file
+     * @see this#add(String, boolean)
      */
 
     default void add(String key) {
@@ -23,9 +23,9 @@ public interface FileManageable {
     }
 
     /**
-     * Add file from cache
+     * Add file
      *
-     * @param key name from language file
+     * @param key    name from language file
      * @param create this represents if the file has to be created or not, in all cases if it is 'true' the file will be created before being loaded otherwise it will only be loaded
      */
 
@@ -35,17 +35,13 @@ public interface FileManageable {
      * @return an object {@link LanguageFile} using {@param key} to get it
      */
 
-    default LanguageFile find(String key) {
-        return get().get("language_" + key);
-    }
+    LanguageFile find(String key);
 
     /**
      * @return if there is an object {@link LanguageFile} with the key {@param key}
      */
 
-    default boolean exists(String key) {
-        return get().containsKey("language_" + key);
-    }
+    boolean exists(String key);
 
 
     /**
@@ -54,13 +50,11 @@ public interface FileManageable {
      * @param key from get and delete object
      */
 
-    default void remove(String key) {
-        get().remove("language_" + key );
-    }
+    void remove(String key);
 
     /**
      * @return the default file {@link LanguageFile}
-     * */
+     */
 
     LanguageFile getDefault();
 }
