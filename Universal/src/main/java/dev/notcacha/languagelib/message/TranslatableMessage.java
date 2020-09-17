@@ -48,33 +48,21 @@ public interface TranslatableMessage {
     }
 
     /**
-     * Set a handler to the message object, this parameter is used to set the {@link PlaceholderApplier} set
-     */
-
-    TranslatableMessage setHolder(Object holder);
-
-    /**
      * Set a {@link PlaceholderApplier} to do set in the message, {@param placeholder} will be the one set to use
      */
 
-    TranslatableMessage addPlaceholder(PlaceholderApplier placeholder);
+    <T> TranslatableMessage addPlaceholder(T holder, PlaceholderApplier placeholder);
 
     /**
      * Add multiple {@link PlaceholderApplier} to be applied to the message
      */
 
-    default TranslatableMessage addPlaceholders(PlaceholderApplier... placeholders) {
+    default <T> TranslatableMessage addPlaceholders(T holder, PlaceholderApplier... placeholders) {
         for (PlaceholderApplier placeholderApplier : placeholders) {
-            addPlaceholder(placeholderApplier);
+            addPlaceholder(holder, placeholderApplier);
         }
         return this;
     }
-
-    /**
-     * Sets an array of {@link PlaceholderApplier}, {@param placeholders} has been set
-     */
-
-    TranslatableMessage setPlaceholders(PlaceholderApplier... placeholders);
 
     /**
      * Set color from message

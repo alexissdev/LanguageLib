@@ -2,7 +2,6 @@ package dev.notcacha.languagelib.bukkit.placeholder;
 
 import dev.notcacha.languagelib.placeholder.PlaceholderApplier;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 

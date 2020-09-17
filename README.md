@@ -15,7 +15,7 @@ LanguageLib is a simple library to make it easier to handle multi languages
 	<dependency>
 	    <groupId>com.github.cassha.LanguageLib</groupId>
 	    <artifactId>languagelib</artifactId> <!-- languagelib-universal, languagelib-bukkit, languagelib-bungee -->
-	    <version>2.0.3-SNAPSHOT</version>
+	    <version>2.0.4-SNAPSHOT</version>
 	</dependency>
 ````
 
@@ -79,13 +79,12 @@ public void sendMessages(Player player) {
 
 #### Create your placeholders
 
-##### There are 2 ways available to create placeholders
+##### There are 1 ways available to create placeholders
 
-The first is this
 ````java
 public class TestPlaceholderApplier implements PlaceholderApplier {
 
-    public String set(Object holder, String text) {
+    public <T> String set(T holder, String text) {
           if (!(holder instanceof Player)) {
               return text;
           }
@@ -96,18 +95,6 @@ public class TestPlaceholderApplier implements PlaceholderApplier {
 }
 ````
 
-And the second is this
-````java
-translateMessage#addPlaceholder((holder, text) -> {
-          if (!(holder instanceof Player)) {
-              return text;
-          }
-          Player player = (Player) player;
-
-          return text.replace("%player_name%", player.getName());
-})
-````
-
 #### Add your placeholders from message
 
 ##### In order to add them as a placeholder, they have to implement PlaceholderApplier
@@ -115,13 +102,13 @@ translateMessage#addPlaceholder((holder, text) -> {
 We can add 1 single placeholder
 
 ```java
-translateMessage#addPlaceholder(new YourPlaceholder())
+translateMessage#addPlaceholder(holder, new YourPlaceholder())
 ```
 
 or multiple
 
 ```java
-translateMessage#addPlaceholders(new PlaceholderTest(), new Placeholder());
+translateMessage#addPlaceholders(holder, placeholders...);
 ```
 
 #### Data to take into account

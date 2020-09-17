@@ -1,37 +1,29 @@
-package dev.notcacha.languagelib.bungee.message;
+package dev.notcacha.languagelib.message;
 
 import dev.notcacha.languagelib.managers.FileManageable;
-import dev.notcacha.languagelib.message.TranslatableMessage;
 import dev.notcacha.languagelib.placeholder.PlaceholderApplier;
-import net.md_5.bungee.api.ChatColor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BungeeTranslatableMessage implements TranslatableMessage {
-
-    private Object holder;
+public class SimpleTranslatableMessage implements TranslatableMessage {
 
     private final String path;
     private final FileManageable fileManageable;
     private final Map<String, String> variables;
+    private final Map<PlaceholderApplier, Object> appliers;
     private boolean color;
 
-    private Set<PlaceholderApplier> placeholdersApplier;
-
-    public BungeeTranslatableMessage(String path, FileManageable fileManageable) {
+    public SimpleTranslatableMessage(String path, FileManageable fileManageable) {
         this.path = path;
         this.fileManageable = fileManageable;
         this.variables = new ConcurrentHashMap<>();
+        this.appliers = new ConcurrentHashMap<>();
         this.color = false;
-        this.placeholdersApplier = new HashSet<>();
-        this.holder = null;
     }
+
 
     @Override
     @NotNull
@@ -54,12 +46,12 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
             translateMessage = translateMessage.replace(key, value);
         }
 
-        for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
-            translateMessage = placeholderApplier.apply(holder, translateMessage);
+        for (PlaceholderApplier placeholderApplier : this.appliers.keySet()) {
+            translateMessage = placeholderApplier.apply(this.appliers.get(placeholderApplier), translateMessage);
         }
 
         if (color) {
-            return ChatColor.translateAlternateColorCodes('&', translateMessage);
+            return MessageColorApplier.apply('&', translateMessage);
         }
 
         return translateMessage;
@@ -80,12 +72,12 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
             translateMessages.replaceAll(message -> message.replace(key, value));
         }
 
-        for (PlaceholderApplier placeholderApplier : placeholdersApplier) {
-            translateMessages.replaceAll(message -> placeholderApplier.apply(holder, message));
+        for (PlaceholderApplier placeholderApplier : this.appliers.keySet()) {
+            translateMessages.replaceAll(message -> placeholderApplier.apply(this.appliers.get(placeholderApplier), message));
         }
 
         if (color) {
-            translateMessages.replaceAll(message -> ChatColor.translateAlternateColorCodes('&', message));
+            translateMessages.replaceAll(message -> MessageColorApplier.apply('&', message));
         }
 
         return translateMessages;
@@ -102,20 +94,8 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
     }
 
     @Override
-    public TranslatableMessage setHolder(Object holder) {
-        this.holder = holder;
-        return this;
-    }
-
-    @Override
-    public TranslatableMessage addPlaceholder(PlaceholderApplier placeholder) {
-        this.placeholdersApplier.add(placeholder);
-        return this;
-    }
-
-    @Override
-    public TranslatableMessage setPlaceholders(PlaceholderApplier... placeholders) {
-        this.placeholdersApplier = new HashSet<>(Arrays.asList(placeholders));
+    public <T> TranslatableMessage addPlaceholder(T holder, PlaceholderApplier placeholder) {
+        this.appliers.put(placeholder, holder);
         return this;
     }
 
@@ -124,4 +104,5 @@ public class BungeeTranslatableMessage implements TranslatableMessage {
         this.color = true;
         return this;
     }
+
 }

@@ -2,12 +2,12 @@ package dev.notcacha.languagelib.bungee;
 
 import dev.notcacha.languagelib.LanguageLib;
 import dev.notcacha.languagelib.bungee.loader.BungeeFileLoader;
-import dev.notcacha.languagelib.bungee.managers.BungeeFileManageable;
-import dev.notcacha.languagelib.bungee.managers.BungeeTranslationManager;
 import dev.notcacha.languagelib.i18n.DefaultI18n;
 import dev.notcacha.languagelib.i18n.I18n;
 import dev.notcacha.languagelib.loader.FileLoader;
 import dev.notcacha.languagelib.managers.FileManageable;
+import dev.notcacha.languagelib.managers.SimpleFileManageable;
+import dev.notcacha.languagelib.managers.SimpleTranslationManager;
 import dev.notcacha.languagelib.managers.TranslationManager;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -59,8 +59,8 @@ public class BungeeLanguageLib implements LanguageLib {
         public Builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
             this.i18n = new DefaultI18n();
             this.fileLoader = new BungeeFileLoader(plugin, i18n);
-            this.fileManageable = new BungeeFileManageable(fileLoader, plugin.getDataFolder(), defaultLanguage, createDefaultFile);
-            this.translationManager = new BungeeTranslationManager(fileManageable);
+            this.fileManageable = new SimpleFileManageable(fileLoader, plugin.getDataFolder(), defaultLanguage, createDefaultFile);
+            this.translationManager = new SimpleTranslationManager(fileManageable);
         }
 
         @Override

@@ -1,9 +1,7 @@
-package dev.notcacha.languagelib.bukkit.managers;
+package dev.notcacha.languagelib.managers;
 
 import dev.notcacha.languagelib.file.LanguageFile;
 import dev.notcacha.languagelib.loader.FileLoader;
-import dev.notcacha.languagelib.managers.FileManageable;
-import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.util.HashMap;
@@ -11,7 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class BukkitFileManageable implements FileManageable {
+public class SimpleFileManageable  implements FileManageable {
 
     private final FileLoader fileLoader;
     private final File folder;
@@ -19,22 +17,18 @@ public class BukkitFileManageable implements FileManageable {
     private final Map<String, LanguageFile> fileMap;
     private final String defaultFile;
 
-    public BukkitFileManageable(FileLoader fileLoader, Plugin plugin, String defaultLanguage) {
-        this(fileLoader, plugin.getDataFolder(), defaultLanguage, false);
-    }
-
-    public BukkitFileManageable(FileLoader fileLoader, File folder, String defaultLanguage) {
+    public SimpleFileManageable(FileLoader fileLoader, File folder, String defaultLanguage) {
         this(fileLoader, folder, defaultLanguage, false);
     }
 
-    public BukkitFileManageable(FileLoader fileLoader, File folder, String defaultLanguage, boolean createDefaultFile) {
+    public SimpleFileManageable(FileLoader fileLoader, File folder, String defaultLanguage, boolean createFile) {
         this.fileLoader = fileLoader;
         this.folder = folder;
 
         this.defaultFile = defaultLanguage;
         this.fileMap = new HashMap<>();
 
-        add(defaultLanguage, createDefaultFile);
+        add(defaultLanguage, createFile);
     }
 
     @Override
@@ -66,4 +60,5 @@ public class BukkitFileManageable implements FileManageable {
     public LanguageFile getDefault() {
         return this.fileMap.get(defaultFile);
     }
+
 }

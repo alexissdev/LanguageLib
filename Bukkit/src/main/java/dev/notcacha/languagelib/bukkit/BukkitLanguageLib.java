@@ -2,12 +2,12 @@ package dev.notcacha.languagelib.bukkit;
 
 import dev.notcacha.languagelib.LanguageLib;
 import dev.notcacha.languagelib.bukkit.loader.BukkitFileLoader;
-import dev.notcacha.languagelib.bukkit.managers.BukkitFileManageable;
-import dev.notcacha.languagelib.bukkit.managers.BukkitTranslationManager;
 import dev.notcacha.languagelib.i18n.DefaultI18n;
 import dev.notcacha.languagelib.i18n.I18n;
 import dev.notcacha.languagelib.loader.FileLoader;
 import dev.notcacha.languagelib.managers.FileManageable;
+import dev.notcacha.languagelib.managers.SimpleFileManageable;
+import dev.notcacha.languagelib.managers.SimpleTranslationManager;
 import dev.notcacha.languagelib.managers.TranslationManager;
 import org.bukkit.plugin.Plugin;
 
@@ -59,8 +59,8 @@ public class BukkitLanguageLib implements LanguageLib {
         public Builder(Plugin plugin, String defaultLanguage, boolean createDefaultFile) {
             this.i18n = new DefaultI18n();
             this.fileLoader = new BukkitFileLoader(plugin, i18n);
-            this.fileManageable = new BukkitFileManageable(fileLoader, plugin.getDataFolder(), defaultLanguage, createDefaultFile);
-            this.translationManager = new BukkitTranslationManager(fileManageable);
+            this.fileManageable = new SimpleFileManageable(fileLoader, plugin.getDataFolder(), defaultLanguage, createDefaultFile);
+            this.translationManager = new SimpleTranslationManager(fileManageable);
         }
 
         @Override
