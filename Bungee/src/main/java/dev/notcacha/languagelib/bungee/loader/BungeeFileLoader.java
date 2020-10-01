@@ -42,13 +42,15 @@ public class BungeeFileLoader implements FileLoader {
     public LanguageFile load(String name, File folder) {
         File file = new File(folder, format.replace("%lang%", name));
         if (!file.exists()) {
-            throw new FileNotFoundException(i18n.getMessage(Message.FILE_NOT_FOUND).replace("%file_name%", name));
+            throw new FileNotFoundException(i18n.getMessage(Message.FILE_NOT_FOUND.getId())
+                    .replace("%file_name%", name));
         }
 
         try {
             return new BungeeLanguageFile(i18n, ConfigurationProvider.getProvider(YamlConfiguration.class).load(file));
         } catch (IOException exception) {
-            throw new IllegalArgumentException(i18n.getMessage(Message.FILE_LOAD_ERROR).replace("%file_name%", name), exception);
+            throw new IllegalArgumentException(i18n.getMessage(Message.FILE_LOAD_ERROR.getId())
+                    .replace("%file_name%", name), exception);
         }
     }
 
@@ -71,7 +73,8 @@ public class BungeeFileLoader implements FileLoader {
             try {
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(inputConfig, file);
             } catch (IOException exception) {
-                throw new IllegalArgumentException(i18n.getMessage(Message.FILE_LOAD_ERROR).replace("%file_name%", name), exception);
+                throw new IllegalArgumentException(i18n.getMessage(Message.FILE_LOAD_ERROR.getId())
+                        .replace("%file_name%", name), exception);
             }
         }
 

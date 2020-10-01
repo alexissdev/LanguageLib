@@ -14,7 +14,7 @@ public class PAPIPlaceholderApplier implements PlaceholderApplier {
     }
 
     @Override
-    public String apply(Object holder, String text) {
+    public <T> String apply(T holder, String text) {
         if (!(holder instanceof Player)) {
             return text;
         }
@@ -23,8 +23,6 @@ public class PAPIPlaceholderApplier implements PlaceholderApplier {
             return text;
         }
 
-        Player player = (Player) holder;
-
-        return PlaceholderAPI.setPlaceholders(player, text);
+        return PlaceholderAPI.setPlaceholders((Player) holder, text);
     }
 }

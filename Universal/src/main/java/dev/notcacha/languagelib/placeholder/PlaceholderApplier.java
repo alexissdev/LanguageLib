@@ -1,6 +1,5 @@
 package dev.notcacha.languagelib.placeholder;
 
-@FunctionalInterface
 public interface PlaceholderApplier {
 
     /**

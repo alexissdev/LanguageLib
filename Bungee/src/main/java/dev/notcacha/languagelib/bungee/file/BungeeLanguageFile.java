@@ -20,17 +20,15 @@ public class BungeeLanguageFile implements LanguageFile {
 
     @Override
     public String getString(String path) {
-        if (file.getString(path) == null) {
-            return i18n.getMessage(Message.MESSAGE_NOT_FOUND).replace("%path%", path);
-        }
-
-        return file.getString(path);
+        return file.getString(path,
+                i18n.getMessage(Message.MESSAGE_NOT_FOUND.getId()).replace("%path%", path));
     }
 
     @Override
     public List<String> getList(String path) {
-        if (file.getList(path) == null ) {
-            return Collections.singletonList(i18n.getMessage(Message.LIST_MESSAGE_NOT_FOUND).replace("%path%", path));
+        if (file.getList(path) == null) {
+            return Collections.singletonList(i18n.getMessage(Message.LIST_MESSAGE_NOT_FOUND.getId())
+                    .replace("%path%", path));
         }
 
         return file.getStringList(path);

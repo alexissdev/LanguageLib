@@ -38,7 +38,8 @@ public class BukkitFileLoader implements FileLoader {
     public LanguageFile load(String name, File folder) {
         File file = new File(folder, format.replace("%lang%", name));
         if (!file.exists()) {
-            throw new FileNotFoundException(i18n.getMessage(Message.FILE_NOT_FOUND).replace("%file_name%", name));
+            throw new FileNotFoundException(i18n.getMessage(Message.FILE_NOT_FOUND.getId())
+                    .replace("%file_name%", name));
         }
 
         return new BukkitLanguageFile(i18n, YamlConfiguration.loadConfiguration(file));
