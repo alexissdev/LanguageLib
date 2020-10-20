@@ -1,4 +1,4 @@
-package dev.notcacha.languagelib.managers;
+package dev.notcacha.languagelib.manageable;
 
 import dev.notcacha.languagelib.file.LanguageFile;
 

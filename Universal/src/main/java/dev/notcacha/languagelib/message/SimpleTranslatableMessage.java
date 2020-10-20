@@ -1,6 +1,7 @@
 package dev.notcacha.languagelib.message;
 
-import dev.notcacha.languagelib.managers.FileManageable;
+import dev.notcacha.languagelib.manageable.FileManageable;
+import dev.notcacha.languagelib.message.color.MessageColorApplier;
 import dev.notcacha.languagelib.placeholder.PlaceholderApplier;
 import org.jetbrains.annotations.NotNull;
 
@@ -104,26 +105,6 @@ public class SimpleTranslatableMessage implements TranslatableMessage {
     public TranslatableMessage colorize() {
         this.color = true;
         return this;
-    }
-
-}
-
-class MessageColorApplier {
-
-    private static final char COLOR_CHAR = '\u00A7';
-    private static final String ALL_CODES = "0123456789AaBbCcDdEeFfKkLlMmNnOoRr";
-
-    public static String apply(char altColorChar, String textToTranslate) {
-        char[] b = textToTranslate.toCharArray();
-
-        for (int i = 0; i < b.length - 1; i++) {
-            if (b[i] == altColorChar && ALL_CODES.indexOf(b[i + 1]) > -1) {
-                b[i] = COLOR_CHAR;
-                b[i + 1] = Character.toLowerCase(b[i + 1]);
-            }
-        }
-
-        return new String(b);
     }
 
 }

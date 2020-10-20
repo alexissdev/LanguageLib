@@ -1,5 +1,6 @@
 package dev.notcacha.languagelib.managers;
 
+import dev.notcacha.languagelib.manageable.FileManageable;
 import dev.notcacha.languagelib.message.SimpleTranslatableMessage;
 import dev.notcacha.languagelib.message.TranslatableMessage;
 

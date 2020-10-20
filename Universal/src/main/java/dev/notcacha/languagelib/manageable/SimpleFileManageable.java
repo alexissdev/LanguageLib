@@ -1,4 +1,4 @@
-package dev.notcacha.languagelib.managers;
+package dev.notcacha.languagelib.manageable;
 
 import dev.notcacha.languagelib.file.LanguageFile;
 import dev.notcacha.languagelib.loader.FileLoader;
@@ -43,17 +43,17 @@ public class SimpleFileManageable  implements FileManageable {
 
     @Override
     public LanguageFile find(String key) {
-        return this.fileMap.get(fileLoader.getFormat().replace("%lang%", key));
+        return this.fileMap.get(key);
     }
 
     @Override
     public boolean exists(String key) {
-        return this.fileMap.containsKey(fileLoader.getFormat().replace("%lang%", key));
+        return this.fileMap.containsKey(key);
     }
 
     @Override
     public void remove(String key) {
-        this.fileMap.remove(fileLoader.getFormat().replace("%lang%", key));
+        this.fileMap.remove(key);
     }
 
     @Override

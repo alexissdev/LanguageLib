@@ -2,7 +2,7 @@ package dev.notcacha.languagelib;
 
 import dev.notcacha.languagelib.i18n.I18n;
 import dev.notcacha.languagelib.loader.FileLoader;
-import dev.notcacha.languagelib.managers.FileManageable;
+import dev.notcacha.languagelib.manageable.FileManageable;
 import dev.notcacha.languagelib.managers.TranslationManager;
 
 public interface LanguageLib {

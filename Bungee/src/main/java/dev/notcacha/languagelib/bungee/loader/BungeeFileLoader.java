@@ -40,18 +40,14 @@ public class BungeeFileLoader implements FileLoader {
 
     @Override
     public LanguageFile load(String name, File folder) {
-        File file = new File(folder, format.replace("%lang%", name));
-        if (!file.exists()) {
-            throw new FileNotFoundException(i18n.getMessage(Message.FILE_NOT_FOUND.getId())
-                    .replace("%file_name%", name));
+        String inputFile = format.replace("%lang%", name);
+
+        InputStream inputStream = plugin.getResourceAsStream(inputFile);
+        if (inputStream == null) {
+            throw new FileNotFoundException("The file " + inputFile + " was not founded in plugin files");
         }
 
-        try {
-            return new BungeeLanguageFile(i18n, ConfigurationProvider.getProvider(YamlConfiguration.class).load(file));
-        } catch (IOException exception) {
-            throw new IllegalArgumentException(i18n.getMessage(Message.FILE_LOAD_ERROR.getId())
-                    .replace("%file_name%", name), exception);
-        }
+        return new BungeeLanguageFile(i18n, ConfigurationProvider.getProvider(YamlConfiguration.class).load(inputStream));
     }
 
     @Override
